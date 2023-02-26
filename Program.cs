@@ -1,5 +1,5 @@
+using ApiMinisterioRecomeco.Configuration;
 using ApiMinisterioRecomeco.Constants;
-using ApiMinisterioRecomeco.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -22,11 +22,7 @@ builder.Services.AddSwaggerGen(c =>
             {
                 Name = "Kleyvisson Matias",
                 Url = new Uri("https://github.com/KleyvissonMatias"),
-            },
-            License = new OpenApiLicense()
-            {
-                Name = "MIT",
-                Url = new Uri("http://opensource.org/licenses/MIT"),
+                Email = "kleyvissonmatias@gmail.com"
             }
         });
 });

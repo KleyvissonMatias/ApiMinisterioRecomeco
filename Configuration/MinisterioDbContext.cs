@@ -1,9 +1,9 @@
 ﻿using ApiMinisterioRecomeco.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ApiMinisterioRecomeco.Repository
+namespace ApiMinisterioRecomeco.Configuration
 {
-    public class MinisterioDbContext : Microsoft.EntityFrameworkCore.DbContext
+    public class MinisterioDbContext : DbContext
     {
         public MinisterioDbContext(DbContextOptions options) : base(options)
         {

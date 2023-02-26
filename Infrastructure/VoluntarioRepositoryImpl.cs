@@ -3,8 +3,20 @@ using ApiMinisterioRecomeco.Repository;
 
 namespace ApiMinisterioRecomeco.Infrastructure
 {
-    public class VoluntarioRepository : IVoluntarioRepository
+    public class VoluntarioRepositoryImpl : IVoluntarioRepository
     {
+        private readonly MinisterioDbContext _dbContext;
+        private readonly ILogger<Voluntario> _logger;
+
+        private const string ERRO_INTERNO = "Ocorreu um erro Interno.";
+        private const string ELEMENTO_NAO_ENCONTRADO = "Elemento não encontrado.";
+
+        public VoluntarioRepositoryImpl(MinisterioDbContext dbContext, ILogger<Voluntario> logger)
+        {
+            _dbContext = dbContext;
+            _logger = logger;
+        }
+
         public Task Create(Voluntario item)
         {
             throw new NotImplementedException();
