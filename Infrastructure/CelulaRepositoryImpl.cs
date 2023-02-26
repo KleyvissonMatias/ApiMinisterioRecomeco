@@ -1,12 +1,12 @@
-﻿using ApiMinisterioRecomeco.Exception;
+﻿using ApiMinisterioRecomeco.Configuration;
+using ApiMinisterioRecomeco.Exception;
 using ApiMinisterioRecomeco.Models;
-using ApiMinisterioRecomeco.Repository;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
 
 namespace ApiMinisterioRecomeco.Infrastructure
 {
-    public class CelulaRepository : ICelulaRepository
+    public class CelulaRepositoryImpl : ICelulaRepository
     {
         private readonly MinisterioDbContext _dbContext;
         private readonly ILogger<Celula> _logger;
@@ -14,7 +14,7 @@ namespace ApiMinisterioRecomeco.Infrastructure
         private const string ERRO_INTERNO = "Ocorreu um erro Interno.";
         private const string ELEMENTO_NAO_ENCONTRADO = "Elemento não encontrado.";
 
-        public CelulaRepository(MinisterioDbContext dbContext, ILogger<Celula> logger)
+        public CelulaRepositoryImpl(MinisterioDbContext dbContext, ILogger<Celula> logger)
         {
             _dbContext = dbContext;
             _logger = logger;

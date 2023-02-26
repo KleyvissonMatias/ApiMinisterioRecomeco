@@ -1,5 +1,5 @@
-﻿using ApiMinisterioRecomeco.Models;
-using ApiMinisterioRecomeco.Repository;
+﻿using ApiMinisterioRecomeco.Configuration;
+using ApiMinisterioRecomeco.Models;
 
 namespace ApiMinisterioRecomeco.Infrastructure
 {
