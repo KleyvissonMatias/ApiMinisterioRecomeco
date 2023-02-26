@@ -8,7 +8,7 @@ namespace ApiMinisterioRecomeco.Infrastructure
         Task<List<Celula>> GetAll();
         Task<Celula> GetById(long id);
         Task Create(Celula item);
-        Task<Celula> Update(Celula item);
+        Task Update(Celula item);
         Task Delete(long id);
     }
 }

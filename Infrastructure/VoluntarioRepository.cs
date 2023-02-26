@@ -25,7 +25,7 @@ namespace ApiMinisterioRecomeco.Infrastructure
             throw new NotImplementedException();
         }
 
-        public Task<Voluntario> Update(Voluntario item)
+        public Task Update(Voluntario item)
         {
             throw new NotImplementedException();
         }

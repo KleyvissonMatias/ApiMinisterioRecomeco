@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ApiMinisterioRecomeco.Repository
 {
-    public class DbContext : Microsoft.EntityFrameworkCore.DbContext
+    public class MinisterioDbContext : Microsoft.EntityFrameworkCore.DbContext
     {
-        public DbContext(DbContextOptions options) : base(options)
+        public MinisterioDbContext(DbContextOptions options) : base(options)
         {
         }
 

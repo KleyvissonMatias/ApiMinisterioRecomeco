@@ -8,7 +8,7 @@ namespace ApiMinisterioRecomeco.Infrastructure
         Task<List<Vida>> GetAll();
         Task<Vida> GetById(long id);
         Task Create(Vida vida);
-        Task<Vida> Update(Vida vida);
+        Task Update(Vida vida);
         Task Delete(long id);
     }
 }
