@@ -1,6 +1,7 @@
 ﻿using ApiMinisterioRecomeco.Exception;
 using ApiMinisterioRecomeco.Models;
 using ApiMinisterioRecomeco.Repository;
+using Microsoft.EntityFrameworkCore;
 using System.Net;
 
 namespace ApiMinisterioRecomeco.Infrastructure
@@ -9,7 +10,9 @@ namespace ApiMinisterioRecomeco.Infrastructure
     {
         private readonly MinisterioDbContext _dbContext;
         private readonly ILogger<Celula> _logger;
-        private const string ERRO_INTERNO = "Erro Interno";
+
+        private const string ERRO_INTERNO = "Ocorreu um erro Interno.";
+        private const string ELEMENTO_NAO_ENCONTRADO = "Elemento não encontrado.";
 
         public CelulaRepository(MinisterioDbContext dbContext, ILogger<Celula> logger)
         {
@@ -38,7 +41,7 @@ namespace ApiMinisterioRecomeco.Infrastructure
                 var celula = await _dbContext.Celulas.FindAsync(id);
                 if (celula == null)
                 {
-                    throw new MinisterioRecomecoException(HttpStatusCode.NotFound, "Elemento não encontrado.");
+                    throw new MinisterioRecomecoException(HttpStatusCode.NotFound, ELEMENTO_NAO_ENCONTRADO);
                 }
 
                 _dbContext.Celulas.Remove(celula);
@@ -52,12 +55,34 @@ namespace ApiMinisterioRecomeco.Infrastructure
 
         public async Task<List<Celula>> GetAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await _dbContext.Celulas.ToListAsync();
+            }
+            catch (MinisterioRecomecoException ex)
+            {
+                throw new MinisterioRecomecoException(HttpStatusCode.InternalServerError, ERRO_INTERNO, ex);
+            }
         }
 
         public async Task<Celula> GetById(long id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var celula = await _dbContext.Celulas.FindAsync(id);
+
+                if (celula == null)
+                {
+                    throw new MinisterioRecomecoException(HttpStatusCode.NotFound, ELEMENTO_NAO_ENCONTRADO);
+                }
+
+                return celula;
+
+            }
+            catch (MinisterioRecomecoException ex)
+            {
+                throw new MinisterioRecomecoException(HttpStatusCode.InternalServerError, ERRO_INTERNO, ex);
+            }
         }
 
         public async Task Update(Celula item)

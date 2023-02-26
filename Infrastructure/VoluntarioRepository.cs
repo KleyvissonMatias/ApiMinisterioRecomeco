@@ -20,7 +20,7 @@ namespace ApiMinisterioRecomeco.Infrastructure
             throw new NotImplementedException();
         }
 
-        public Voluntario GetById(long id)
+        public Task<Voluntario> GetById(long id)
         {
             throw new NotImplementedException();
         }
