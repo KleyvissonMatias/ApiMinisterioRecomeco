@@ -5,10 +5,10 @@ namespace ApiMinisterioRecomeco.Infrastructure
 {
     public interface IVidaRepository
     {
-        Task<List<Vida>> GetAll();
-        Task<Vida> GetById(long id);
-        Task Create(Vida vida);
-        Task Update(Vida vida);
-        Task Delete(long id);
+        Task<List<Vida>> GetAllAsync();
+        Task<Vida> GetByIdAsync(long id);
+        Task CreateAsync(Vida vida);
+        Task UpdateAsync(Vida vida);
+        Task DeleteAsync(long id);
     }
 }

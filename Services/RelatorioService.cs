@@ -5,36 +5,36 @@ namespace ApiMinisterioRecomeco.Services
 {
     public class RelatorioService : IService<Relatorio>
     {
-        IRelatorioRepository _relatorioRepository;
+        private readonly IRelatorioRepository _relatorioRepository;
 
         public RelatorioService(IRelatorioRepository relatorioRepository)
         {
             _relatorioRepository = relatorioRepository;
         }
 
-        public async Task Create(Relatorio item)
+        public async Task CreateAsync(Relatorio item)
         {
-            await _relatorioRepository.Create(item);
+            await _relatorioRepository.CreateAsync(item);
         }
 
-        public async Task Delete(long id)
+        public async Task DeleteAsync(long id)
         {
-            await _relatorioRepository.Delete(id);
+            await _relatorioRepository.DeleteAsync(id);
         }
 
-        public async Task<List<Relatorio>> GetAll()
+        public async Task<List<Relatorio>> GetAllAsync()
         {
-            return await _relatorioRepository.GetAll();
+            return await _relatorioRepository.GetAllAsync();
         }
 
-        public async Task<Relatorio> GetById(long id)
+        public async Task<Relatorio> GetByIdAsync(long id)
         {
-            return await _relatorioRepository.GetById(id);
+            return await _relatorioRepository.GetByIdAsync(id);
         }
 
-        public async Task Update(Relatorio item)
+        public async Task UpdateAsync(Relatorio item)
         {
-            await _relatorioRepository.Update(item);
+            await _relatorioRepository.UpdateAsync(item);
         }
     }
 }

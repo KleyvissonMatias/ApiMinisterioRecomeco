@@ -5,36 +5,36 @@ namespace ApiMinisterioRecomeco.Services
 {
     public class VoluntarioService : IService<Voluntario>
     {
-        IVoluntarioRepository _voluntarioRepository;
+        private readonly IVoluntarioRepository _voluntarioRepository;
 
         public VoluntarioService(IVoluntarioRepository voluntarioRepository)
         {
             _voluntarioRepository = voluntarioRepository;
         }
 
-        public async Task Create(Voluntario item)
+        public async Task CreateAsync(Voluntario item)
         {
-            await _voluntarioRepository.Create(item);
+            await _voluntarioRepository.CreateAsync(item);
         }
 
-        public async Task Delete(long id)
+        public async Task DeleteAsync(long id)
         {
-            await _voluntarioRepository.Delete(id);
+            await _voluntarioRepository.DeleteAsync(id);
         }
 
-        public async Task<List<Voluntario>> GetAll()
+        public async Task<List<Voluntario>> GetAllAsync()
         {
-            return await _voluntarioRepository.GetAll();
+            return await _voluntarioRepository.GetAllAsync();
         }
 
-        public async Task<Voluntario> GetById(long id)
+        public async Task<Voluntario> GetByIdAsync(long id)
         {
-            return await _voluntarioRepository.GetById(id);
+            return await _voluntarioRepository.GetByIdAsync(id);
         }
 
-        public async Task Update(Voluntario item)
+        public async Task UpdateAsync(Voluntario item)
         {
-            await _voluntarioRepository.Update(item);
+            await _voluntarioRepository.UpdateAsync(item);
         }
     }
 }

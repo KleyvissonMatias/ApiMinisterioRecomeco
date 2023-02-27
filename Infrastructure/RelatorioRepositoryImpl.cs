@@ -6,39 +6,39 @@ namespace ApiMinisterioRecomeco.Infrastructure
 {
     public class RelatorioRepositoryImpl : IRelatorioRepository
     {
-        private readonly MinisterioDbContext _dbContext;
+        private readonly AppDbContext _dbContext;
         private readonly ILogger<Relatorio> _logger;
 
         private const string ERRO_INTERNO = "Ocorreu um erro Interno.";
         private const string ELEMENTO_NAO_ENCONTRADO = "Elemento não encontrado.";
 
-        public RelatorioRepositoryImpl(MinisterioDbContext dbContext, ILogger<Relatorio> logger)
+        public RelatorioRepositoryImpl(AppDbContext dbContext, ILogger<Relatorio> logger)
         {
             _dbContext = dbContext;
             _logger = logger;
         }
 
-        public Task Create(Relatorio item)
+        public Task CreateAsync(Relatorio item)
         {
             throw new NotImplementedException();
         }
 
-        public Task Delete(long id)
+        public Task DeleteAsync(long id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Relatorio>> GetAll()
+        public Task<List<Relatorio>> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<Relatorio> GetById(long id)
+        public Task<Relatorio> GetByIdAsync(long id)
         {
             throw new NotImplementedException();
         }
 
-        public Task Update(Relatorio item)
+        public Task UpdateAsync(Relatorio item)
         {
             throw new NotImplementedException();
         }

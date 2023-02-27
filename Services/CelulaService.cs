@@ -1,40 +1,84 @@
-﻿using ApiMinisterioRecomeco.Infrastructure;
+﻿using ApiMinisterioRecomeco.Exception;
+using ApiMinisterioRecomeco.Infrastructure;
 using ApiMinisterioRecomeco.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace ApiMinisterioRecomeco.Services
 {
     public class CelulaService : IService<Celula>
     {
-        ICelulaRepository _celulaRepository;
+        private readonly ICelulaRepository _celulaRepository;
+        private readonly ILogger<Celula> _logger;
 
-        public CelulaService(ICelulaRepository celulaRepository)
+        private const string ERRO_INTERNO = "Ocorreu um erro Interno.";
+        private const string ELEMENTO_NAO_ENCONTRADO = "Elemento não encontrado.";
+
+        public CelulaService(ICelulaRepository celulaRepository, ILogger<Celula> logger)
         {
             _celulaRepository = celulaRepository;
+            _logger = logger;
         }
 
-        public async Task Create(Celula item)
+        public async Task CreateAsync(Celula item)
         {
-            await _celulaRepository.Create(item);
+            try
+            {
+                await _celulaRepository.CreateAsync(item);
+            }
+            catch (MinisterioRecomecoException ex)
+            {
+                throw new MinisterioRecomecoException(HttpStatusCode.InternalServerError, ERRO_INTERNO, ex);
+            }
         }
 
-        public async Task Delete(long id)
+        public async Task DeleteAsync(long id)
         {
-            await _celulaRepository.Delete(id);
+            try
+            {
+                var celula = await GetByIdAsync(id) ?? throw new MinisterioRecomecoException(HttpStatusCode.NotFound, ELEMENTO_NAO_ENCONTRADO);
+                await _celulaRepository.DeleteAsync(celula);
+            }
+            catch (MinisterioRecomecoException ex)
+            {
+                throw new MinisterioRecomecoException(HttpStatusCode.InternalServerError, ERRO_INTERNO, ex);
+            }
         }
 
-        public async Task<List<Celula>> GetAll()
+        public async Task<List<Celula>> GetAllAsync()
         {
-            return await _celulaRepository.GetAll();
+            try
+            {
+                return await _celulaRepository.GetAllAsync();
+            }
+            catch (MinisterioRecomecoException ex)
+            {
+                throw new MinisterioRecomecoException(HttpStatusCode.InternalServerError, ERRO_INTERNO, ex);
+            }
         }
 
-        public async Task<Celula> GetById(long id)
+        public async Task<Celula> GetByIdAsync(long id)
         {
-            return await _celulaRepository.GetById(id);
+            try
+            {
+                return await _celulaRepository.GetByIdAsync(id) ?? throw new MinisterioRecomecoException(HttpStatusCode.NotFound, ELEMENTO_NAO_ENCONTRADO);
+            }
+            catch (MinisterioRecomecoException ex)
+            {
+                throw new MinisterioRecomecoException(HttpStatusCode.InternalServerError, ERRO_INTERNO, ex);
+            }
         }
 
-        public async Task Update(Celula item)
+        public async Task UpdateAsync(Celula item)
         {
-            await _celulaRepository.Update(item);
+            try
+            {
+                await _celulaRepository.UpdateAsync(item);
+            }
+            catch (MinisterioRecomecoException ex)
+            {
+                throw new MinisterioRecomecoException(HttpStatusCode.InternalServerError, ERRO_INTERNO, ex);
+            }
         }
     }
 }

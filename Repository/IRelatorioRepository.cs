@@ -4,10 +4,10 @@ namespace ApiMinisterioRecomeco.Repository
 {
     public interface IRelatorioRepository
     {
-        Task<List<Relatorio>> GetAll();
-        Task<Relatorio> GetById(long id);
-        Task Create(Relatorio item);
-        Task Update(Relatorio item);
-        Task Delete(long id);
+        Task<List<Relatorio>> GetAllAsync();
+        Task<Relatorio> GetByIdAsync(long id);
+        Task CreateAsync(Relatorio item);
+        Task UpdateAsync(Relatorio item);
+        Task DeleteAsync(long id);
     }
 }

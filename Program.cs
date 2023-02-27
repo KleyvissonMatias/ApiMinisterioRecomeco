@@ -1,5 +1,7 @@
 using ApiMinisterioRecomeco.Configuration;
 using ApiMinisterioRecomeco.Constants;
+using ApiMinisterioRecomeco.Infrastructure;
+using ApiMinisterioRecomeco.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -27,7 +29,12 @@ builder.Services.AddSwaggerGen(c =>
         });
 });
 
-builder.Services.AddDbContext<MinisterioDbContext>(options =>
+builder.Services.AddScoped<ICelulaRepository, CelulaRepositoryImpl>();
+builder.Services.AddScoped<IVidaRepository, VidaRepositoryImpl>();
+builder.Services.AddScoped<IRelatorioRepository, RelatorioRepositoryImpl>();
+builder.Services.AddScoped<IVoluntarioRepository, VoluntarioRepositoryImpl>();
+
+builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseMySql(Constants.CONNECTION_STRING, ServerVersion.AutoDetect(Constants.CONNECTION_STRING));
 });
