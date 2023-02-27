@@ -33,7 +33,12 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseMySql(Constants.CONNECTION_STRING, ServerVersion.AutoDetect(Constants.CONNECTION_STRING));
+    var builder = new ConfigurationBuilder()
+                         .SetBasePath(Directory.GetCurrentDirectory())
+                         .AddJsonFile("appSettings.json", optional: true, reloadOnChange: true);
+    IConfiguration _configuration = builder.Build();
+    var connectionString = _configuration.GetConnectionString(Constants.CONNECTION_STRING);
+    options.UseMySql(ServerVersion.AutoDetect(connectionString));
 });
 
 builder.Services.AddScoped<IService<Celula>, CelulaService>();
