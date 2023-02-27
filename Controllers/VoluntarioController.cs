@@ -9,7 +9,7 @@ namespace ApiMinisterioRecomeco.Controllers
     [ApiController]
     public class VoluntarioController : ControllerBase
     {
-        IService<Voluntario> _service;
+        private readonly IService<Voluntario> _service;
 
         public VoluntarioController(IService<Voluntario> service)
         {

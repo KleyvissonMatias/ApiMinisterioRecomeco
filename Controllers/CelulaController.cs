@@ -10,7 +10,7 @@ namespace ApiMinisterioRecomeco.Controllers
     [ApiController]
     public class CelulaController : ControllerBase
     {
-        IService<Celula> _service;
+        private readonly IService<Celula> _service;
 
         public CelulaController(IService<Celula> service)
         {

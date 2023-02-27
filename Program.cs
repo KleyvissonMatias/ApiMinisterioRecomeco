@@ -1,7 +1,9 @@
 using ApiMinisterioRecomeco.Configuration;
 using ApiMinisterioRecomeco.Constants;
 using ApiMinisterioRecomeco.Infrastructure;
+using ApiMinisterioRecomeco.Models;
 using ApiMinisterioRecomeco.Repository;
+using ApiMinisterioRecomeco.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -34,6 +36,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(Constants.CONNECTION_STRING, ServerVersion.AutoDetect(Constants.CONNECTION_STRING));
 });
 
+builder.Services.AddScoped<IService<Celula>, CelulaService>();
+builder.Services.AddScoped<IService<Voluntario>, VoluntarioService>();
+builder.Services.AddScoped<IService<Vida>, VidaService>();
+builder.Services.AddScoped<IService<Relatorio>, RelatorioService>();
 builder.Services.AddScoped<ICelulaRepository, CelulaRepositoryImpl>();
 builder.Services.AddScoped<IVidaRepository, VidaRepositoryImpl>();
 builder.Services.AddScoped<IRelatorioRepository, RelatorioRepositoryImpl>();

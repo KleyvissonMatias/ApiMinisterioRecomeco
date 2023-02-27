@@ -9,7 +9,7 @@ namespace ApiMinisterioRecomeco.Controllers
     [ApiController]
     public class VidaController : ControllerBase
     {
-        IService<Vida> _service;
+        private readonly IService<Vida> _service;
 
         public VidaController(IService<Vida> service)
         {
