@@ -37,7 +37,7 @@ namespace ApiMinisterioRecomeco.Controllers
         public async Task<IActionResult> PostAsync([FromBody] Vida vida)
         {
             await _service.CreateAsync(vida);
-            return Created($"/get-vida-por-id?id={vida.Id}", vida);
+            return Created($"/get-listar-por-id?id={vida.Id}", vida);
         }
 
         [HttpPut]

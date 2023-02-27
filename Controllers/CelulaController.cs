@@ -35,16 +35,14 @@ namespace ApiMinisterioRecomeco.Controllers
 
         [HttpPost]
         [ActionName("Criar")]
-
         public async Task<IActionResult> PostAsync([FromBody] Celula celula)
         {
             await _service.CreateAsync(celula);
-            return Created($"/get-celula-por-id?id={celula.Id}", celula);
+            return Created($"/get-listar-por-id?id={celula.Id}", celula);
         }
 
         [HttpPut]
         [ActionName("Atualizar")]
-
         public async Task<IActionResult> PutAsync([FromBody] Celula celulaAtualizado)
         {
             await _service.UpdateAsync(celulaAtualizado);
