@@ -45,6 +45,7 @@ builder.Services.AddScoped<IService<Celula>, CelulaService>();
 builder.Services.AddScoped<IService<Voluntario>, VoluntarioService>();
 builder.Services.AddScoped<IService<Vida>, VidaService>();
 builder.Services.AddScoped<IService<Relatorio>, RelatorioService>();
+
 builder.Services.AddScoped<ICelulaRepository, CelulaRepositoryImpl>();
 builder.Services.AddScoped<IVidaRepository, VidaRepositoryImpl>();
 builder.Services.AddScoped<IRelatorioRepository, RelatorioRepositoryImpl>();
