@@ -1,46 +1,45 @@
 ﻿using ApiMinisterioRecomeco.Configuration;
 using ApiMinisterioRecomeco.Models;
 using ApiMinisterioRecomeco.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApiMinisterioRecomeco.Infrastructure
 {
     public class RelatorioRepositoryImpl : IRelatorioRepository
     {
         private readonly AppDbContext _dbContext;
-        private readonly ILogger<Relatorio> _logger;
 
-        private const string ERRO_INTERNO = "Ocorreu um erro Interno.";
-        private const string ELEMENTO_NAO_ENCONTRADO = "Elemento não encontrado.";
-
-        public RelatorioRepositoryImpl(AppDbContext dbContext, ILogger<Relatorio> logger)
+        public RelatorioRepositoryImpl(AppDbContext dbContext)
         {
             _dbContext = dbContext;
-            _logger = logger;
         }
 
-        public Task CreateAsync(Relatorio item)
+        public async Task CreateAsync(Relatorio relatorio)
         {
-            throw new NotImplementedException();
+            _dbContext.Relatorios.Add(relatorio);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(long id)
+        public async Task DeleteAsync(Relatorio relatorio)
         {
-            throw new NotImplementedException();
+            _dbContext.Relatorios.Remove(relatorio);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task<List<Relatorio>> GetAllAsync()
+        public async Task<List<Relatorio>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Relatorios.ToListAsync();
         }
 
-        public Task<Relatorio> GetByIdAsync(long id)
+        public async Task<Relatorio> GetByIdAsync(long id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Relatorios.FindAsync(id);
         }
 
-        public Task UpdateAsync(Relatorio item)
+        public async Task UpdateAsync(Relatorio relatorio)
         {
-            throw new NotImplementedException();
+            _dbContext.Relatorios.Update(relatorio);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

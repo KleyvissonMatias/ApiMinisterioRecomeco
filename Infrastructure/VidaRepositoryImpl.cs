@@ -1,45 +1,45 @@
 ﻿using ApiMinisterioRecomeco.Configuration;
 using ApiMinisterioRecomeco.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApiMinisterioRecomeco.Infrastructure
 {
     public class VidaRepositoryImpl : IVidaRepository
     {
         private readonly AppDbContext _dbContext;
-        private readonly ILogger<Vida> _logger;
 
-        private const string ERRO_INTERNO = "Ocorreu um erro Interno.";
-        private const string ELEMENTO_NAO_ENCONTRADO = "Elemento não encontrado.";
-
-        public VidaRepositoryImpl(AppDbContext dbContext, ILogger<Vida> logger)
+        public VidaRepositoryImpl(AppDbContext dbContext)
         {
             _dbContext = dbContext;
-            _logger = logger;
         }
 
-        public Task CreateAsync(Vida vida)
+        public async Task CreateAsync(Vida vida)
         {
-            throw new NotImplementedException();
+            _dbContext.Vidas.Add(vida);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(long id)
+        public async Task DeleteAsync(Vida vida)
         {
-            throw new NotImplementedException();
+            _dbContext.Vidas.Remove(vida);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task<List<Vida>> GetAllAsync()
+        public async Task<List<Vida>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Vidas.ToListAsync();
         }
 
-        public Task<Vida> GetByIdAsync(long id)
+        public async Task<Vida> GetByIdAsync(long id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Vidas.FindAsync(id);
         }
 
-        public Task UpdateAsync(Vida vida)
+        public async Task UpdateAsync(Vida vida)
         {
-            throw new NotImplementedException();
+
+            _dbContext.Vidas.Update(vida);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

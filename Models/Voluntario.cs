@@ -1,31 +1,37 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace ApiMinisterioRecomeco.Models
 {
     public class Voluntario
     {
-        [JsonProperty("id")]
-        private long Id { get; set; }
+        [JsonPropertyName("id")]
+        public long Id { get; set; }
 
-        [JsonProperty("nome_completo")]
-        private string NomeCompleto { get; set; }
+        [JsonPropertyName("nome_completo")]
+        public string NomeCompleto { get; set; }
 
-        [JsonProperty("email")]
-        private string Email { get; set; }
+        [JsonPropertyName("email")]
+        public string Email { get; set; }
 
-        [JsonProperty("nome_celula")]
-        private string NomeCelula { get; set; }
+        [JsonPropertyName("nome_celula")]
+        public string NomeCelula { get; set; }
 
-        [JsonProperty("lider_treinamento")]
-        private string LiderTreinamento { get; set; }
+        [JsonPropertyName("lider_treinamento")]
+        public string LiderTreinamento { get; set; }
 
-        [JsonProperty("lider_celula")]
-        private string LiderCelula { get; set; }
+        [JsonPropertyName("lider_celula")]
+        public string LiderCelula { get; set; }
 
-        [JsonProperty("nome_lider")]
-        private string NomeLider { get; set; }
+        [JsonPropertyName("nome_lider")]
+        public string NomeLider { get; set; }
 
-        [JsonProperty("telefone_contato")]
-        private string TelefoneContato { get; set; }
+        [JsonPropertyName("telefone_contato")]
+        public string TelefoneContato { get; set; }
+
+        [JsonPropertyName("data_inclusao")]
+        public DateTime DataInclusao { get; set; } = DateTime.Now;
+
+        [JsonPropertyName("data_alteracao")]
+        public DateTime? DataAlteracao { get; set; }
     }
 }

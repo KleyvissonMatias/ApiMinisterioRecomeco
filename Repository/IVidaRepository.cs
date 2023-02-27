@@ -9,6 +9,6 @@ namespace ApiMinisterioRecomeco.Infrastructure
         Task<Vida> GetByIdAsync(long id);
         Task CreateAsync(Vida vida);
         Task UpdateAsync(Vida vida);
-        Task DeleteAsync(long id);
+        Task DeleteAsync(Vida vida);
     }
 }

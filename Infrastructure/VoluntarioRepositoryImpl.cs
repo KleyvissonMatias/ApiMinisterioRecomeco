@@ -1,45 +1,44 @@
 ﻿using ApiMinisterioRecomeco.Configuration;
 using ApiMinisterioRecomeco.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApiMinisterioRecomeco.Infrastructure
 {
     public class VoluntarioRepositoryImpl : IVoluntarioRepository
     {
         private readonly AppDbContext _dbContext;
-        private readonly ILogger<Voluntario> _logger;
 
-        private const string ERRO_INTERNO = "Ocorreu um erro Interno.";
-        private const string ELEMENTO_NAO_ENCONTRADO = "Elemento não encontrado.";
-
-        public VoluntarioRepositoryImpl(AppDbContext dbContext, ILogger<Voluntario> logger)
+        public VoluntarioRepositoryImpl(AppDbContext dbContext)
         {
             _dbContext = dbContext;
-            _logger = logger;
         }
 
-        public Task CreateAsync(Voluntario item)
+        public async Task CreateAsync(Voluntario voluntario)
         {
-            throw new NotImplementedException();
+            _dbContext.Voluntarios.Add(voluntario);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(long id)
+        public async Task DeleteAsync(Voluntario voluntario)
         {
-            throw new NotImplementedException();
+            _dbContext.Voluntarios.Remove(voluntario);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task<List<Voluntario>> GetAllAsync()
+        public async Task<List<Voluntario>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Voluntarios.ToListAsync();
         }
 
-        public Task<Voluntario> GetByIdAsync(long id)
+        public async Task<Voluntario> GetByIdAsync(long id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Voluntarios.FindAsync(id);
         }
 
-        public Task UpdateAsync(Voluntario item)
+        public async Task UpdateAsync(Voluntario voluntario)
         {
-            throw new NotImplementedException();
+            _dbContext.Voluntarios.Update(voluntario);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

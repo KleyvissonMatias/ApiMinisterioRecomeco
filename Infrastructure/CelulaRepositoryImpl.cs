@@ -15,15 +15,15 @@ namespace ApiMinisterioRecomeco.Infrastructure
             _dbContext = dbContext;
         }
 
-        public async Task CreateAsync(Celula item)
+        public async Task CreateAsync(Celula celula)
         {
-            _dbContext.Celulas.Add(item);
+            _dbContext.Celulas.Add(celula);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(Celula item)
+        public async Task DeleteAsync(Celula celula)
         {
-            _dbContext.Celulas.Remove(item);
+            _dbContext.Celulas.Remove(celula);
             await _dbContext.SaveChangesAsync();
         }
 
@@ -37,9 +37,9 @@ namespace ApiMinisterioRecomeco.Infrastructure
             return await _dbContext.Celulas.FindAsync(id);
         }
 
-        public async Task UpdateAsync(Celula item)
+        public async Task UpdateAsync(Celula celula)
         {
-            _dbContext.Celulas.Update(item);
+            _dbContext.Celulas.Update(celula);
             await _dbContext.SaveChangesAsync();
         }
     }

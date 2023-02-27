@@ -1,19 +1,25 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace ApiMinisterioRecomeco.Models
 {
     public class Relatorio
     {
-        [JsonProperty("id")]
-        private long Id { get; set; }
+        [JsonPropertyName("id")]
+        public long Id { get; set; }
 
-        [JsonProperty("nome_voluntario")]
-        private string NomeVoluntario { get; set; }
+        [JsonPropertyName("nome_voluntario")]
+        public string NomeVoluntario { get; set; }
 
-        [JsonProperty("nome_vida")]
-        private string NomeVida { get; set; }
+        [JsonPropertyName("nome_vida")]
+        public string NomeVida { get; set; }
 
-        [JsonProperty("retorno_contato")]
-        private string RetornoContato { get; set; }
+        [JsonPropertyName("retorno_contato")]
+        public string RetornoContato { get; set; }
+
+        [JsonPropertyName("data_inclusao")]
+        public DateTime DataInclusao { get; set; } = DateTime.Now;
+
+        [JsonPropertyName("data_alteracao")]
+        public DateTime? DataAlteracao { get; set; }
     }
 }

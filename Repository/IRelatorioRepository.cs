@@ -6,8 +6,8 @@ namespace ApiMinisterioRecomeco.Repository
     {
         Task<List<Relatorio>> GetAllAsync();
         Task<Relatorio> GetByIdAsync(long id);
-        Task CreateAsync(Relatorio item);
-        Task UpdateAsync(Relatorio item);
-        Task DeleteAsync(long id);
+        Task CreateAsync(Relatorio relatorio);
+        Task UpdateAsync(Relatorio relatorio);
+        Task DeleteAsync(Relatorio relatorio);
     }
 }

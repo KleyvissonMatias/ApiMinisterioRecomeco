@@ -29,15 +29,15 @@ builder.Services.AddSwaggerGen(c =>
         });
 });
 
-builder.Services.AddScoped<ICelulaRepository, CelulaRepositoryImpl>();
-builder.Services.AddScoped<IVidaRepository, VidaRepositoryImpl>();
-builder.Services.AddScoped<IRelatorioRepository, RelatorioRepositoryImpl>();
-builder.Services.AddScoped<IVoluntarioRepository, VoluntarioRepositoryImpl>();
-
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseMySql(Constants.CONNECTION_STRING, ServerVersion.AutoDetect(Constants.CONNECTION_STRING));
 });
+
+builder.Services.AddScoped<ICelulaRepository, CelulaRepositoryImpl>();
+builder.Services.AddScoped<IVidaRepository, VidaRepositoryImpl>();
+builder.Services.AddScoped<IRelatorioRepository, RelatorioRepositoryImpl>();
+builder.Services.AddScoped<IVoluntarioRepository, VoluntarioRepositoryImpl>();
 
 var app = builder.Build();
 

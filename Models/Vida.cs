@@ -1,61 +1,67 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace ApiMinisterioRecomeco.Models
 {
     public class Vida
     {
-        [JsonProperty("id")]
-        private long Id { get; set; }
+        [JsonPropertyName("id")]
+        public long Id { get; set; }
 
-        [JsonProperty("nome_completo")]
-        private string NomeCompleto { get; set; }
+        [JsonPropertyName("nome_completo")]
+        public string NomeCompleto { get; set; }
 
-        [JsonProperty("data_nascimento")]
-        private string DataNascimento { get; set; }
+        [JsonPropertyName("data_nascimento")]
+        public string DataNascimento { get; set; }
 
-        [JsonProperty("sexo")]
-        private string Sexo { get; set; }
+        [JsonPropertyName("sexo")]
+        public string Sexo { get; set; }
 
-        [JsonProperty("estado_civil")]
-        private string EstadoCivil { get; set; }
+        [JsonPropertyName("estado_civil")]
+        public string EstadoCivil { get; set; }
 
-        [JsonProperty("telefone_contato")]
-        private string Telefone { get; set; }
+        [JsonPropertyName("telefone_contato")]
+        public string Telefone { get; set; }
 
-        [JsonProperty("telefone_outro_contato")]
-        private string? TelefoneOutroContato { get; set; }
+        [JsonPropertyName("telefone_outro_contato")]
+        public string? TelefoneOutroContato { get; set; }
 
-        [JsonProperty("endereco")]
-        private Endereco Endereco { get; set; }
+        [JsonPropertyName("endereco")]
+        public Endereco Endereco { get; set; }
 
-        [JsonProperty("email")]
-        private string Email { get; set; }
+        [JsonPropertyName("email")]
+        public string Email { get; set; }
 
-        [JsonProperty("rede_social")]
-        private string? RedeSocial { get; set; }
+        [JsonPropertyName("rede_social")]
+        public string? RedeSocial { get; set; }
 
-        [JsonProperty("possui_celula")]
-        private string PossuiCelula { get; set; }
+        [JsonPropertyName("possui_celula")]
+        public string PossuiCelula { get; set; }
 
-        [JsonProperty("nome_celula")]
-        private string? NomeCelula { get; set; }
+        [JsonPropertyName("nome_celula")]
+        public string? NomeCelula { get; set; }
 
-        [JsonProperty("tipo_conversao")]
-        private string TipoConversao { get; set; }
+        [JsonPropertyName("tipo_conversao")]
+        public string TipoConversao { get; set; }
 
-        [JsonProperty("campus")]
-        private string Campus { get; set; }
+        [JsonPropertyName("campus")]
+        public string Campus { get; set; }
 
-        [JsonProperty("culto")]
-        private string Culto { get; set; }
+        [JsonPropertyName("culto")]
+        public string Culto { get; set; }
 
-        [JsonProperty("horario_culto")]
-        private string HorarioCulto { get; set; }
+        [JsonPropertyName("horario_culto")]
+        public string HorarioCulto { get; set; }
 
-        [JsonProperty("nome_voluntario")]
-        private string NomeVoluntario { get; set; }
+        [JsonPropertyName("nome_voluntario")]
+        public string NomeVoluntario { get; set; }
 
-        [JsonProperty("observacao")]
-        private string? Observacao { get; set; }
+        [JsonPropertyName("observacao")]
+        public string? Observacao { get; set; }
+
+        [JsonPropertyName("data_inclusao")]
+        public DateTime DataInclusao { get; set; } = DateTime.Now;
+
+        [JsonPropertyName("data_alteracao")]
+        public DateTime? DataAlteracao { get; set; }
     }
 }
