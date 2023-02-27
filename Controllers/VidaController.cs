@@ -17,6 +17,7 @@ namespace ApiMinisterioRecomeco.Controllers
         }
 
         [HttpGet]
+        [ActionName("Listar")]
         public async Task<IActionResult> GetAllAsync()
         {
             var vidas = await _service.GetAllAsync();
@@ -24,6 +25,7 @@ namespace ApiMinisterioRecomeco.Controllers
         }
 
         [HttpGet]
+        [ActionName("ListarPorId")]
         public async Task<IActionResult> GetPorIdAsync([FromQuery] long id)
         {
             var vida = await _service.GetByIdAsync(id);
@@ -31,6 +33,7 @@ namespace ApiMinisterioRecomeco.Controllers
         }
 
         [HttpPost]
+        [ActionName("Criar")]
         public async Task<IActionResult> PostAsync([FromBody] Vida vida)
         {
             await _service.CreateAsync(vida);
@@ -38,6 +41,7 @@ namespace ApiMinisterioRecomeco.Controllers
         }
 
         [HttpPut]
+        [ActionName("Atualizar")]
         public async Task<IActionResult> PutAsync([FromBody] Vida vidaAtualizado)
         {
             await _service.UpdateAsync(vidaAtualizado);
@@ -46,6 +50,7 @@ namespace ApiMinisterioRecomeco.Controllers
 
         [Route("{id}")]
         [HttpDelete]
+        [ActionName("Deletar")]
         public async Task<IActionResult> DeleteAsync(long id)
         {
             await _service.DeleteAsync(id);

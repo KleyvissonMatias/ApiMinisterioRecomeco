@@ -18,6 +18,7 @@ namespace ApiMinisterioRecomeco.Controllers
         }
 
         [HttpGet]
+        [ActionName("Listar")]
         public async Task<IActionResult> GetAllAsync()
         {
             var relatorio = await _service.GetAllAsync();
@@ -25,6 +26,7 @@ namespace ApiMinisterioRecomeco.Controllers
         }
 
         [HttpGet]
+        [ActionName("ListarPorId")]
         public async Task<IActionResult> GetPorIdAsync([FromQuery] long id)
         {
             var relatorio = await _service.GetByIdAsync(id);
@@ -32,6 +34,7 @@ namespace ApiMinisterioRecomeco.Controllers
         }
 
         [HttpPost]
+        [ActionName("Listar")]
         public async Task<IActionResult> PostAsync([FromBody] Relatorio relatorio)
         {
             await _service.CreateAsync(relatorio);
@@ -39,6 +42,7 @@ namespace ApiMinisterioRecomeco.Controllers
         }
 
         [HttpPut]
+        [ActionName("Atualizar")]
         public async Task<IActionResult> PutAsync([FromBody] Relatorio relatorioAtualizado)
         {
             await _service.UpdateAsync(relatorioAtualizado);
@@ -47,6 +51,7 @@ namespace ApiMinisterioRecomeco.Controllers
 
         [Route("{id}")]
         [HttpDelete]
+        [ActionName("Deletar")]
         public async Task<IActionResult> DeleteAsync(long id)
         {
             await _service.DeleteAsync(id);
