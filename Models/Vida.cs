@@ -1,67 +1,68 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ApiMinisterioRecomeco.Models
 {
     public class Vida
     {
-        [JsonPropertyName("id")]
+        [Column("id")]
         public long Id { get; set; }
 
-        [JsonPropertyName("nome_completo")]
+        [Column("nome_completo")]
         public string NomeCompleto { get; set; }
 
-        [JsonPropertyName("data_nascimento")]
+        [Column("data_nascimento")]
         public string DataNascimento { get; set; }
 
-        [JsonPropertyName("sexo")]
+        [Column("sexo")]
         public string Sexo { get; set; }
 
-        [JsonPropertyName("estado_civil")]
+        [Column("estado_civil")]
         public string EstadoCivil { get; set; }
 
-        [JsonPropertyName("telefone_contato")]
+        [Column("telefone_contato")]
         public string Telefone { get; set; }
 
-        [JsonPropertyName("telefone_outro_contato")]
+        [Column("telefone_outro_contato")]
         public string? TelefoneOutroContato { get; set; }
 
-        [JsonPropertyName("endereco")]
+        [ForeignKey("id_endereco")]
         public Endereco Endereco { get; set; }
 
-        [JsonPropertyName("email")]
+        [Column("email")]
         public string Email { get; set; }
 
-        [JsonPropertyName("rede_social")]
+        [Column("rede_social")]
         public string? RedeSocial { get; set; }
 
-        [JsonPropertyName("possui_celula")]
+        [Column("possui_celula")]
         public string PossuiCelula { get; set; }
 
-        [JsonPropertyName("nome_celula")]
+        [Column("nome_celula")]
         public string? NomeCelula { get; set; }
 
-        [JsonPropertyName("tipo_conversao")]
+        [Column("tipo_conversao")]
         public string TipoConversao { get; set; }
 
-        [JsonPropertyName("campus")]
+        [Column("campus")]
         public string Campus { get; set; }
 
-        [JsonPropertyName("culto")]
+        [Column("culto")]
         public string Culto { get; set; }
 
-        [JsonPropertyName("horario_culto")]
+        [Column("horario_culto")]
         public string HorarioCulto { get; set; }
 
-        [JsonPropertyName("nome_voluntario")]
+        [Column("nome_voluntario")]
         public string NomeVoluntario { get; set; }
 
-        [JsonPropertyName("observacao")]
+        [Column("observacao")]
         public string? Observacao { get; set; }
 
-        [JsonPropertyName("data_inclusao")]
+        [Column("data_inclusao")]
         public DateTime DataInclusao { get; set; } = DateTime.Now;
 
-        [JsonPropertyName("data_alteracao")]
+        [Column("data_alteracao")]
         public DateTime? DataAlteracao { get; set; }
     }
 }

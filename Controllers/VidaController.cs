@@ -26,7 +26,7 @@ namespace ApiMinisterioRecomeco.Controllers
 
         [HttpGet]
         [ActionName("ListarPorId")]
-        public async Task<IActionResult> GetPorIdAsync([FromQuery] long id)
+        public async Task<IActionResult> GetPorIdAsync([FromQuery] Int64 id)
         {
             var vida = await _service.GetByIdAsync(id);
             return Ok(vida);
@@ -51,7 +51,7 @@ namespace ApiMinisterioRecomeco.Controllers
         [Route("{id}")]
         [HttpDelete]
         [ActionName("Deletar")]
-        public async Task<IActionResult> DeleteAsync(long id)
+        public async Task<IActionResult> DeleteAsync(Int64 id)
         {
             await _service.DeleteAsync(id);
             return NoContent();

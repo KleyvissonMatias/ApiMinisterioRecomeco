@@ -1,25 +1,26 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ApiMinisterioRecomeco.Models
 {
     public class Relatorio
     {
-        [JsonPropertyName("id")]
+        [Column("id")]
         public long Id { get; set; }
 
-        [JsonPropertyName("nome_voluntario")]
+        [Column("nome_voluntario")]
         public string NomeVoluntario { get; set; }
 
-        [JsonPropertyName("nome_vida")]
+        [Column("nome_vida")]
         public string NomeVida { get; set; }
 
-        [JsonPropertyName("retorno_contato")]
+        [Column("retorno_contato")]
         public string RetornoContato { get; set; }
 
-        [JsonPropertyName("data_inclusao")]
+        [Column("data_inclusao")]
         public DateTime DataInclusao { get; set; } = DateTime.Now;
 
-        [JsonPropertyName("data_alteracao")]
+        [Column("data_alteracao")]
         public DateTime? DataAlteracao { get; set; }
     }
 }

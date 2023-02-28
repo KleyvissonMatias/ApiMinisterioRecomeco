@@ -37,8 +37,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
                          .SetBasePath(Directory.GetCurrentDirectory())
                          .AddJsonFile("appSettings.json", optional: true, reloadOnChange: true);
     IConfiguration _configuration = builder.Build();
+
+    var serverVersion = new MySqlServerVersion(new Version(8, 0, 27));
+
     var connectionString = _configuration.GetConnectionString(Constants.CONNECTION_STRING);
-    options.UseMySql(ServerVersion.AutoDetect(connectionString));
+    options.UseMySql(connectionString, serverVersion);
 });
 
 builder.Services.AddScoped<IService<Celula>, CelulaService>();

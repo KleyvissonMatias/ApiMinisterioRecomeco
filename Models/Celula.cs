@@ -1,43 +1,44 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ApiMinisterioRecomeco.Models
 {
     public class Celula
     {
-        [JsonPropertyName("id")]
+        [Column("id")]
         public long Id { get; set; }
 
-        [JsonPropertyName("nome_celula")]
+        [Column("nome_celula")]
         public string NomeCelula { get; set; }
 
-        [JsonPropertyName("nome_lider")]
+        [Column("nome_lider")]
         public string NomeLider { get; set; }
 
-        [JsonPropertyName("rede")]
+        [Column("rede")]
         public string Rede { get; set; }
 
-        [JsonPropertyName("nome_coordenadores")]
+        [Column("nome_coordenadores")]
         public string NomeCoordenadores { get; set; }
 
-        [JsonPropertyName("reuniao")]
+        [Column("reuniao")]
         public string Reuniao { get; set; }
 
-        [JsonPropertyName("horario")]
+        [Column("horario")]
         public string Horario { get; set; }
 
-        [JsonPropertyName("endereco")]
+        [ForeignKey("id_endereco")]
         public Endereco Endereco { get; set; }
 
-        [JsonPropertyName("telefone_contato")]
+        [Column("telefone_contato")]
         public string TelefoneContato { get; set; }
 
-        [JsonPropertyName("email_lider")]
+        [Column("email_lider")]
         public string EmailLider { get; set; }
 
-        [JsonPropertyName("data_inclusao")]
+        [Column("data_inclusao")]
         public DateTime DataInclusao { get; set; } = DateTime.Now;
 
-        [JsonPropertyName("data_alteracao")]
+        [Column("data_alteracao")]
         public DateTime? DataAlteracao { get; set; }
     }
 }

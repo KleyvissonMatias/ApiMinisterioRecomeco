@@ -1,37 +1,38 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ApiMinisterioRecomeco.Models
 {
     public class Endereco
     {
-        [JsonPropertyName("id")]
+        [Column("id")]
         public long Id { get; set; }
         
-        [JsonPropertyName("rua")]
+        [Column("rua")]
         public string Rua { get; set; }
 
-        [JsonPropertyName("numero")]
+        [Column("numero")]
         public string Numero { get; set; }
 
-        [JsonPropertyName("bairro")]
+        [Column("bairro")]
         public string Bairro { get; set; }
 
-        [JsonPropertyName("complemento")]
+        [Column("complemento")]
         public string? Complemento { get; set; }
 
-        [JsonPropertyName("cidade")]
+        [Column("cidade")]
         public string Cidade { get; set; }
 
-        [JsonPropertyName("uf")]
+        [Column("uf")]
         public string Uf { get; set; }
 
-        [JsonPropertyName("cep")]
+        [Column("cep")]
         public string Cep { get; set; }
 
-        [JsonPropertyName("data_inclusao")]
+        [Column("data_inclusao")]
         public DateTime DataInclusao { get; set; } = DateTime.Now;
 
-        [JsonPropertyName("data_alteracao")]
+        [Column("data_alteracao")]
         public DateTime? DataAlteracao { get; set; }
     }
 }
