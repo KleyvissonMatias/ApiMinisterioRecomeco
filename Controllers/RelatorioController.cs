@@ -81,7 +81,6 @@ namespace ApiMinisterioRecomeco.Controllers
         [ActionName("criar")]
         public async Task<IActionResult> PostAsync([FromBody] Relatorio relatorio)
         {
-
             try
             {
                 await _service.CreateAsync(relatorio);
