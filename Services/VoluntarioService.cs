@@ -1,6 +1,7 @@
 ﻿using ApiMinisterioRecomeco.Exception;
 using ApiMinisterioRecomeco.Infrastructure;
 using ApiMinisterioRecomeco.Models;
+using static ApiMinisterioRecomeco.Constants.Errors;
 using System.Net;
 
 namespace ApiMinisterioRecomeco.Services
@@ -9,9 +10,6 @@ namespace ApiMinisterioRecomeco.Services
     {
         private readonly IVoluntarioRepository _voluntarioRepository;
         private readonly ILogger<Voluntario> _logger;
-
-        private const string ERRO_INTERNO = "Ocorreu um erro Interno.";
-        private const string ELEMENTO_NAO_ENCONTRADO = "Elemento não encontrado.";
 
         public VoluntarioService(IVoluntarioRepository voluntarioRepository, ILogger<Voluntario> logger)
         {
@@ -27,11 +25,11 @@ namespace ApiMinisterioRecomeco.Services
             }
             catch (MinisterioRecomecoException ex)
             {
-                throw new MinisterioRecomecoException(HttpStatusCode.InternalServerError, ERRO_INTERNO, ex);
+                throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }
 
-        public async Task DeleteAsync(long id)
+        public async Task DeleteAsync(Int64 id)
         {
             try
             {
@@ -40,7 +38,7 @@ namespace ApiMinisterioRecomeco.Services
             }
             catch (MinisterioRecomecoException ex)
             {
-                throw new MinisterioRecomecoException(HttpStatusCode.InternalServerError, ERRO_INTERNO, ex);
+                throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }
 
@@ -52,11 +50,11 @@ namespace ApiMinisterioRecomeco.Services
             }
             catch (MinisterioRecomecoException ex)
             {
-                throw new MinisterioRecomecoException(HttpStatusCode.InternalServerError, ERRO_INTERNO, ex);
+                throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }
 
-        public async Task<Voluntario> GetByIdAsync(long id)
+        public async Task<Voluntario> GetByIdAsync(Int64 id)
         {
             try
             {
@@ -64,7 +62,7 @@ namespace ApiMinisterioRecomeco.Services
             }
             catch (MinisterioRecomecoException ex)
             {
-                throw new MinisterioRecomecoException(HttpStatusCode.InternalServerError, ERRO_INTERNO, ex);
+                throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }
 
@@ -72,11 +70,12 @@ namespace ApiMinisterioRecomeco.Services
         {
             try
             {
+                voluntario.DataAlteracao = DateTime.Now;
                 await _voluntarioRepository.UpdateAsync(voluntario);
             }
             catch (MinisterioRecomecoException ex)
             {
-                throw new MinisterioRecomecoException(HttpStatusCode.InternalServerError, ERRO_INTERNO, ex);
+                throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }
     }

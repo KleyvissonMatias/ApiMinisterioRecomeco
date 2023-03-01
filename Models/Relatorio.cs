@@ -6,7 +6,7 @@ namespace ApiMinisterioRecomeco.Models
     public class Relatorio
     {
         [Column("id")]
-        public long Id { get; set; }
+        public Int64 Id { get; set; }
 
         [Column("nome_voluntario")]
         public string NomeVoluntario { get; set; }
@@ -20,6 +20,7 @@ namespace ApiMinisterioRecomeco.Models
         [Column("data_inclusao")]
         public DateTime DataInclusao { get; set; } = DateTime.Now;
 
+        [JsonIgnore]
         [Column("data_alteracao")]
         public DateTime? DataAlteracao { get; set; }
     }

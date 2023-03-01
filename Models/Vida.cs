@@ -6,7 +6,7 @@ namespace ApiMinisterioRecomeco.Models
     public class Vida
     {
         [Column("id")]
-        public long Id { get; set; }
+        public Int64 Id { get; set; }
 
         [Column("nome_completo")]
         public string NomeCompleto { get; set; }
@@ -26,7 +26,11 @@ namespace ApiMinisterioRecomeco.Models
         [Column("telefone_outro_contato")]
         public string? TelefoneOutroContato { get; set; }
 
+        [JsonIgnore]
         [ForeignKey("id_endereco")]
+        [Column("id_endereco")]
+        public Int64 EnderecoId { get; set; }
+
         public Endereco Endereco { get; set; }
 
         [Column("email")]
@@ -62,6 +66,7 @@ namespace ApiMinisterioRecomeco.Models
         [Column("data_inclusao")]
         public DateTime DataInclusao { get; set; } = DateTime.Now;
 
+        [JsonIgnore]
         [Column("data_alteracao")]
         public DateTime? DataAlteracao { get; set; }
     }

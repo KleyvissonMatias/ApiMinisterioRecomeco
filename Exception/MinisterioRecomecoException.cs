@@ -4,17 +4,17 @@ namespace ApiMinisterioRecomeco.Exception
 {
     public class MinisterioRecomecoException : HttpRequestException
     {
-        HttpStatusCode _httpStatusCode;
-        private readonly string _message;
-        Object _data = new object();
+        public readonly HttpStatusCode? _httpStatusCode;
+        public readonly string _message;
+        public readonly Object? _data = new object();
 
-        public MinisterioRecomecoException(HttpStatusCode status, string message) : base(message)
+        public MinisterioRecomecoException(HttpStatusCode? status, string message) : base(message)
         {
             _httpStatusCode = status;
             _message = message;
         }
 
-        public MinisterioRecomecoException(HttpStatusCode status, string message, Object obj)
+        public MinisterioRecomecoException(HttpStatusCode? status, string message, Object obj)
         {
             _httpStatusCode = status;
             _message = message;

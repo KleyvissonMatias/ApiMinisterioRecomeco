@@ -30,7 +30,7 @@ namespace ApiMinisterioRecomeco.Infrastructure
             return await _dbContext.Voluntarios.ToListAsync();
         }
 
-        public async Task<Voluntario> GetByIdAsync(long id)
+        public async Task<Voluntario> GetByIdAsync(Int64 id)
         {
             return await _dbContext.Voluntarios.FindAsync(id);
         }

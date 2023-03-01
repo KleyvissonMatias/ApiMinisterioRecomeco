@@ -1,5 +1,5 @@
 ﻿using ApiMinisterioRecomeco.Exception;
-using ApiMinisterioRecomeco.Infrastructure;
+using static ApiMinisterioRecomeco.Constants.Errors;
 using ApiMinisterioRecomeco.Models;
 using ApiMinisterioRecomeco.Repository;
 using System.Net;
@@ -10,9 +10,6 @@ namespace ApiMinisterioRecomeco.Services
     {
         private readonly IRelatorioRepository _relatorioRepository;
         private readonly ILogger<Relatorio> _logger;
-
-        private const string ERRO_INTERNO = "Ocorreu um erro Interno.";
-        private const string ELEMENTO_NAO_ENCONTRADO = "Elemento não encontrado.";
 
         public RelatorioService(IRelatorioRepository relatorioRepository, ILogger<Relatorio> logger)
         {
@@ -28,11 +25,11 @@ namespace ApiMinisterioRecomeco.Services
             }
             catch (MinisterioRecomecoException ex)
             {
-                throw new MinisterioRecomecoException(HttpStatusCode.InternalServerError, ERRO_INTERNO, ex);
+                throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }
 
-        public async Task DeleteAsync(long id)
+        public async Task DeleteAsync(Int64 id)
         {
             try
             {
@@ -41,7 +38,7 @@ namespace ApiMinisterioRecomeco.Services
             }
             catch (MinisterioRecomecoException ex)
             {
-                throw new MinisterioRecomecoException(HttpStatusCode.InternalServerError, ERRO_INTERNO, ex);
+                throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }
 
@@ -53,11 +50,11 @@ namespace ApiMinisterioRecomeco.Services
             }
             catch (MinisterioRecomecoException ex)
             {
-                throw new MinisterioRecomecoException(HttpStatusCode.InternalServerError, ERRO_INTERNO, ex);
+                throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }
 
-        public async Task<Relatorio> GetByIdAsync(long id)
+        public async Task<Relatorio> GetByIdAsync(Int64 id)
         {
             try
             {
@@ -65,7 +62,7 @@ namespace ApiMinisterioRecomeco.Services
             }
             catch (MinisterioRecomecoException ex)
             {
-                throw new MinisterioRecomecoException(HttpStatusCode.InternalServerError, ERRO_INTERNO, ex);
+                throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }
 
@@ -73,11 +70,12 @@ namespace ApiMinisterioRecomeco.Services
         {
             try
             {
+                item.DataAlteracao = DateTime.Now;
                 await _relatorioRepository.UpdateAsync(item);
             }
             catch (MinisterioRecomecoException ex)
             {
-                throw new MinisterioRecomecoException(HttpStatusCode.InternalServerError, ERRO_INTERNO, ex);
+                throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }
     }

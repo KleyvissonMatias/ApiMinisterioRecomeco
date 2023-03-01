@@ -1,7 +1,9 @@
-﻿using ApiMinisterioRecomeco.Models;
+﻿using ApiMinisterioRecomeco.Exception;
+using ApiMinisterioRecomeco.Models;
 using ApiMinisterioRecomeco.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace ApiMinisterioRecomeco.Controllers
 {
@@ -17,44 +19,149 @@ namespace ApiMinisterioRecomeco.Controllers
         }
 
         [HttpGet]
-        [ActionName("Listar")]
+        [ActionName("listar")]
         public async Task<IActionResult> GetAllAsync()
         {
-            var vidas = await _service.GetAllAsync();
-            return Ok(vidas);
+            try
+            {
+                var vidas = await _service.GetAllAsync();
+                return Ok(vidas);
+            }
+            catch (MinisterioRecomecoException ex)
+            {
+                Response responseError = new()
+                {
+                    StatusCode = (HttpStatusCode)ex._httpStatusCode,
+                    Message = ex._message
+                };
+                return BadRequest(responseError);
+            }
+            catch (System.Exception e)
+            {
+                Response responseError = new()
+                {
+                    StatusCode = HttpStatusCode.InternalServerError,
+                    Message = e.Message
+                };
+                return StatusCode((int)HttpStatusCode.InternalServerError, responseError);
+            }
         }
 
         [HttpGet]
-        [ActionName("ListarPorId")]
+        [ActionName("listar-por-id")]
         public async Task<IActionResult> GetPorIdAsync([FromQuery] Int64 id)
         {
-            var vida = await _service.GetByIdAsync(id);
-            return Ok(vida);
+            try
+            {
+                var vida = await _service.GetByIdAsync(id);
+                return Ok(vida);
+            }
+            catch (MinisterioRecomecoException ex)
+            {
+                Response responseError = new()
+                {
+                    StatusCode = (HttpStatusCode)ex._httpStatusCode,
+                    Message = ex._message
+                };
+                return BadRequest(responseError);
+            }
+            catch (System.Exception e)
+            {
+                Response responseError = new()
+                {
+                    StatusCode = HttpStatusCode.InternalServerError,
+                    Message = e.Message
+                };
+                return StatusCode((int)HttpStatusCode.InternalServerError, responseError);
+            }
         }
 
         [HttpPost]
-        [ActionName("Criar")]
+        [ActionName("criar")]
         public async Task<IActionResult> PostAsync([FromBody] Vida vida)
         {
-            await _service.CreateAsync(vida);
-            return Created($"/get-listar-por-id?id={vida.Id}", vida);
+            try
+            {
+                await _service.CreateAsync(vida);
+                return Created($"/listar-por-id?id={vida.Id}", vida);
+            }
+            catch (MinisterioRecomecoException ex)
+            {
+                Response responseError = new()
+                {
+                    StatusCode = (HttpStatusCode)ex._httpStatusCode,
+                    Message = ex._message
+                };
+                return BadRequest(responseError);
+            }
+            catch (System.Exception e)
+            {
+                Response responseError = new()
+                {
+                    StatusCode = HttpStatusCode.InternalServerError,
+                    Message = e.Message
+                };
+                return StatusCode((int)HttpStatusCode.InternalServerError, responseError);
+            }
         }
 
         [HttpPut]
-        [ActionName("Atualizar")]
+        [ActionName("atualizar")]
         public async Task<IActionResult> PutAsync([FromBody] Vida vidaAtualizado)
         {
-            await _service.UpdateAsync(vidaAtualizado);
-            return NoContent();
+            try
+            {
+                await _service.UpdateAsync(vidaAtualizado);
+                return NoContent();
+            }
+            catch (MinisterioRecomecoException ex)
+            {
+                Response responseError = new()
+                {
+                    StatusCode = (HttpStatusCode)ex._httpStatusCode,
+                    Message = ex._message
+                };
+                return BadRequest(responseError);
+            }
+            catch (System.Exception e)
+            {
+                Response responseError = new()
+                {
+                    StatusCode = HttpStatusCode.InternalServerError,
+                    Message = e.Message
+                };
+                return StatusCode((int)HttpStatusCode.InternalServerError, responseError);
+            }
         }
 
         [Route("{id}")]
         [HttpDelete]
-        [ActionName("Deletar")]
+        [ActionName("deletar")]
         public async Task<IActionResult> DeleteAsync(Int64 id)
         {
-            await _service.DeleteAsync(id);
-            return NoContent();
+            try
+            {
+                await _service.DeleteAsync(id);
+                return NoContent();
+            }
+            catch (MinisterioRecomecoException ex)
+            {
+                Response responseError = new()
+                {
+                    StatusCode = (HttpStatusCode)ex._httpStatusCode,
+                    Message = ex._message
+                };
+                return BadRequest(responseError);
+            }
+            catch (System.Exception e)
+            {
+                Response responseError = new()
+                {
+                    StatusCode = HttpStatusCode.InternalServerError,
+                    Message = e.Message
+                };
+                return StatusCode((int)HttpStatusCode.InternalServerError, responseError);
+            }
         }
     }
 }

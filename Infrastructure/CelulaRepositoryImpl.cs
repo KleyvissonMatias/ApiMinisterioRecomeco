@@ -27,14 +27,14 @@ namespace ApiMinisterioRecomeco.Infrastructure
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<List<Celula>> GetAllAsync()    
+        public async Task<List<Celula>> GetAllAsync()
         {
-            return await _dbContext.Celulas.ToListAsync();
+            return await _dbContext.Celulas.Include(e => e.Endereco).ToListAsync();
         }
 
-        public async Task<Celula> GetByIdAsync(long id)
+        public async Task<Celula> GetByIdAsync(Int64 id)
         {
-            return await _dbContext.Celulas.FindAsync(id);
+            return await _dbContext.Celulas.Include(e => e.Endereco).FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task UpdateAsync(Celula celula)

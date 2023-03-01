@@ -6,9 +6,9 @@ namespace ApiMinisterioRecomeco.Infrastructure
     public interface ICelulaRepository
     {
         Task<List<Celula>> GetAllAsync();
-        Task<Celula> GetByIdAsync(long id);
-        Task CreateAsync(Celula item);
-        Task UpdateAsync(Celula item);
-        Task DeleteAsync(Celula item);
+        Task<Celula> GetByIdAsync(Int64 id);
+        Task CreateAsync(Celula celula);
+        Task UpdateAsync(Celula celula);
+        Task DeleteAsync(Celula celula);
     }
 }

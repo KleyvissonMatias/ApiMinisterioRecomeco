@@ -1,5 +1,6 @@
 ﻿using ApiMinisterioRecomeco.Exception;
 using ApiMinisterioRecomeco.Infrastructure;
+using static ApiMinisterioRecomeco.Constants.Errors;
 using ApiMinisterioRecomeco.Models;
 using System.Net;
 
@@ -9,9 +10,6 @@ namespace ApiMinisterioRecomeco.Services
     {
         private readonly IVidaRepository _vidaRepository;
         private readonly ILogger<Vida> _logger;
-
-        private const string ERRO_INTERNO = "Ocorreu um erro Interno.";
-        private const string ELEMENTO_NAO_ENCONTRADO = "Elemento não encontrado.";
 
         public VidaService(IVidaRepository vidaRepository, ILogger<Vida> logger)
         {
@@ -27,11 +25,11 @@ namespace ApiMinisterioRecomeco.Services
             }
             catch (MinisterioRecomecoException ex)
             {
-                throw new MinisterioRecomecoException(HttpStatusCode.InternalServerError, ERRO_INTERNO, ex);
+                throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }
 
-        public async Task DeleteAsync(long id)
+        public async Task DeleteAsync(Int64 id)
         {
             try
             {
@@ -40,7 +38,7 @@ namespace ApiMinisterioRecomeco.Services
             }
             catch (MinisterioRecomecoException ex)
             {
-                throw new MinisterioRecomecoException(HttpStatusCode.InternalServerError, ERRO_INTERNO, ex);
+                throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }
 
@@ -52,11 +50,11 @@ namespace ApiMinisterioRecomeco.Services
             }
             catch (MinisterioRecomecoException ex)
             {
-                throw new MinisterioRecomecoException(HttpStatusCode.InternalServerError, ERRO_INTERNO, ex);
+                throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }
 
-        public async Task<Vida> GetByIdAsync(long id)
+        public async Task<Vida> GetByIdAsync(Int64 id)
         {
             try
             {
@@ -64,19 +62,20 @@ namespace ApiMinisterioRecomeco.Services
             }
             catch (MinisterioRecomecoException ex)
             {
-                throw new MinisterioRecomecoException(HttpStatusCode.InternalServerError, ERRO_INTERNO, ex);
+                throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }
 
         public async Task UpdateAsync(Vida item)
         {
             try
-            {
+            {   
+                item.DataAlteracao = DateTime.Now;
                 await _vidaRepository.UpdateAsync(item);
             }
             catch (MinisterioRecomecoException ex)
             {
-                throw new MinisterioRecomecoException(HttpStatusCode.InternalServerError, ERRO_INTERNO, ex);
+                throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }
     }

@@ -1,14 +1,11 @@
 ﻿using ApiMinisterioRecomeco.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata;
 
 namespace ApiMinisterioRecomeco.Configuration
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions options) : base(options)
-        {
-        }
-
         public DbSet<Endereco> Enderecos { get; set; }
 
         public DbSet<Celula> Celulas { get; set; }
@@ -18,5 +15,20 @@ namespace ApiMinisterioRecomeco.Configuration
         public DbSet<Relatorio> Relatorios { get; set; }
 
         public DbSet<Voluntario> Voluntarios { get; set; }
+
+        public AppDbContext(DbContextOptions options) : base(options)
+        {
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Celula>()
+                .HasOne(c => c.Endereco)
+                .WithOne();
+
+            modelBuilder.Entity<Vida>()
+               .HasOne(c => c.Endereco)
+               .WithOne();
+        }
     }
 }

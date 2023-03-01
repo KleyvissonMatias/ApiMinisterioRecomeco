@@ -6,7 +6,7 @@ namespace ApiMinisterioRecomeco.Models
     public class Celula
     {
         [Column("id")]
-        public long Id { get; set; }
+        public Int64 Id { get; set; }
 
         [Column("nome_celula")]
         public string NomeCelula { get; set; }
@@ -26,7 +26,11 @@ namespace ApiMinisterioRecomeco.Models
         [Column("horario")]
         public string Horario { get; set; }
 
+        [JsonIgnore]
         [ForeignKey("id_endereco")]
+        [Column("id_endereco")]
+        public Int64 EnderecoId { get; set; }
+
         public Endereco Endereco { get; set; }
 
         [Column("telefone_contato")]
@@ -38,7 +42,8 @@ namespace ApiMinisterioRecomeco.Models
         [Column("data_inclusao")]
         public DateTime DataInclusao { get; set; } = DateTime.Now;
 
-        [Column("data_alteracao")]
-        public DateTime? DataAlteracao { get; set; }
+        [JsonIgnore]
+        [Column("data_alteracao")] 
+        public DateTime? DataAlteracao { get; set; } 
     }
 }

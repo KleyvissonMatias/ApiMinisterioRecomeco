@@ -27,12 +27,12 @@ namespace ApiMinisterioRecomeco.Infrastructure
 
         public async Task<List<Vida>> GetAllAsync()
         {
-            return await _dbContext.Vidas.ToListAsync();
+            return await _dbContext.Vidas.Include(e => e.Endereco).ToListAsync();
         }
 
-        public async Task<Vida> GetByIdAsync(long id)
+        public async Task<Vida> GetByIdAsync(Int64 id)
         {
-            return await _dbContext.Vidas.FindAsync(id);
+            return await _dbContext.Vidas.Include(e => e.Endereco).FirstOrDefaultAsync(v => v.Id == id);
         }
 
         public async Task UpdateAsync(Vida vida)

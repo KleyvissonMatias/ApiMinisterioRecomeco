@@ -1,8 +1,10 @@
-﻿using ApiMinisterioRecomeco.Models;
+﻿using ApiMinisterioRecomeco.Exception;
+using ApiMinisterioRecomeco.Models;
 using ApiMinisterioRecomeco.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics.CodeAnalysis;
+using System.Net;
 
 namespace ApiMinisterioRecomeco.Controllers
 {
@@ -18,44 +20,150 @@ namespace ApiMinisterioRecomeco.Controllers
         }
 
         [HttpGet]
-        [ActionName("Listar")]
+        [ActionName("listar")]
         public async Task<IActionResult> GetAllAsync()
         {
-            var relatorio = await _service.GetAllAsync();
-            return Ok(relatorio);
+            try
+            {
+                var relatorio = await _service.GetAllAsync();
+                return Ok(relatorio);
+            }
+            catch (MinisterioRecomecoException ex)
+            {
+                Response responseError = new()
+                {
+                    StatusCode = (HttpStatusCode)ex._httpStatusCode,
+                    Message = ex._message
+                };
+                return BadRequest(responseError);
+            }
+            catch (System.Exception e)
+            {
+                Response responseError = new()
+                {
+                    StatusCode = HttpStatusCode.InternalServerError,
+                    Message = e.Message
+                };
+                return StatusCode((int)HttpStatusCode.InternalServerError, responseError);
+            }
         }
 
         [HttpGet]
-        [ActionName("ListarPorId")]
+        [ActionName("listar-por-id")]
         public async Task<IActionResult> GetPorIdAsync([FromQuery] Int64 id)
         {
-            var relatorio = await _service.GetByIdAsync(id);
-            return Ok(relatorio);
+            try
+            {
+                var relatorio = await _service.GetByIdAsync(id);
+                return Ok(relatorio);
+            }
+            catch (MinisterioRecomecoException ex)
+            {
+                Response responseError = new()
+                {
+                    StatusCode = (HttpStatusCode)ex._httpStatusCode,
+                    Message = ex._message
+                };
+                return BadRequest(responseError);
+            }
+            catch (System.Exception e)
+            {
+                Response responseError = new()
+                {
+                    StatusCode = HttpStatusCode.InternalServerError,
+                    Message = e.Message
+                };
+                return StatusCode((int)HttpStatusCode.InternalServerError, responseError);
+            }
         }
 
         [HttpPost]
-        [ActionName("Listar")]
+        [ActionName("criar")]
         public async Task<IActionResult> PostAsync([FromBody] Relatorio relatorio)
         {
-            await _service.CreateAsync(relatorio);
-            return Created($"/get-listar-por-id?id={relatorio.Id}", relatorio);
+
+            try
+            {
+                await _service.CreateAsync(relatorio);
+                return Created($"/listar-por-id?id={relatorio.Id}", relatorio);
+            }
+            catch (MinisterioRecomecoException ex)
+            {
+                Response responseError = new()
+                {
+                    StatusCode = (HttpStatusCode)ex._httpStatusCode,
+                    Message = ex._message
+                };
+                return BadRequest(responseError);
+            }
+            catch (System.Exception e)
+            {
+                Response responseError = new()
+                {
+                    StatusCode = HttpStatusCode.InternalServerError,
+                    Message = e.Message
+                };
+                return StatusCode((int)HttpStatusCode.InternalServerError, responseError);
+            }
         }
 
         [HttpPut]
-        [ActionName("Atualizar")]
+        [ActionName("atualizar")]
         public async Task<IActionResult> PutAsync([FromBody] Relatorio relatorioAtualizado)
         {
-            await _service.UpdateAsync(relatorioAtualizado);
-            return NoContent();
+            try
+            {
+                await _service.UpdateAsync(relatorioAtualizado);
+                return NoContent();
+            }
+            catch (MinisterioRecomecoException ex)
+            {
+                Response responseError = new()
+                {
+                    StatusCode = (HttpStatusCode)ex._httpStatusCode,
+                    Message = ex._message
+                };
+                return BadRequest(responseError);
+            }
+            catch (System.Exception e)
+            {
+                Response responseError = new()
+                {
+                    StatusCode = HttpStatusCode.InternalServerError,
+                    Message = e.Message
+                };
+                return StatusCode((int)HttpStatusCode.InternalServerError, responseError);
+            }
         }
 
         [Route("{id}")]
         [HttpDelete]
-        [ActionName("Deletar")]
+        [ActionName("deletar")]
         public async Task<IActionResult> DeleteAsync(Int64 id)
         {
-            await _service.DeleteAsync(id);
-            return NoContent();
+            try
+            {
+                await _service.DeleteAsync(id);
+                return NoContent();
+            }
+            catch (MinisterioRecomecoException ex)
+            {
+                Response responseError = new()
+                {
+                    StatusCode = (HttpStatusCode)ex._httpStatusCode,
+                    Message = ex._message
+                };
+                return BadRequest(responseError);
+            }
+            catch (System.Exception e)
+            {
+                Response responseError = new()
+                {
+                    StatusCode = HttpStatusCode.InternalServerError,
+                    Message = e.Message
+                };
+                return StatusCode((int)HttpStatusCode.InternalServerError, responseError);
+            }
         }
     }
 }
