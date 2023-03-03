@@ -32,7 +32,7 @@ namespace ApiMinisterioRecomeco.Infrastructure
 
         public async Task<Celula> GetByIdAsync(Int64 id)
         {
-            return await _dbContext.Celulas.Include(e => e.Endereco).FirstOrDefaultAsync(c => c.Id == id);
+            return await _dbContext.Celulas.Include(e => e.Endereco).FirstOrDefaultAsync(c => c.Id == id) ?? await Task.FromResult<Celula>(null);
         }
 
         public async Task UpdateAsync(Celula celula)

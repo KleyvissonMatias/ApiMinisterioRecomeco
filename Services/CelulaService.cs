@@ -33,9 +33,8 @@ namespace ApiMinisterioRecomeco.Services
         {
             try
             {
-                var celula = await GetByIdAsync(id) ?? await Task.FromResult<Celula>(null);
-                var celulaDelete = celula ?? throw new MinisterioRecomecoException(HttpStatusCode.NotFound, ELEMENTO_NAO_ENCONTRADO);
-                await _celulaRepository.DeleteAsync(celulaDelete);
+                var celula = await GetByIdAsync(id) ?? throw new MinisterioRecomecoException(HttpStatusCode.NotFound, ELEMENTO_NAO_ENCONTRADO);
+                await _celulaRepository.DeleteAsync(celula);
             }
             catch (MinisterioRecomecoException ex)
             {
@@ -59,8 +58,7 @@ namespace ApiMinisterioRecomeco.Services
         {
             try
             {
-                var celula = await _celulaRepository.GetByIdAsync(id) ?? await Task.FromResult<Celula>(null);
-                return celula ?? throw new MinisterioRecomecoException(HttpStatusCode.NotFound, ELEMENTO_NAO_ENCONTRADO);
+                return await _celulaRepository.GetByIdAsync(id) ?? throw new MinisterioRecomecoException(HttpStatusCode.NotFound, ELEMENTO_NAO_ENCONTRADO);
             }
             catch (MinisterioRecomecoException ex)
             {

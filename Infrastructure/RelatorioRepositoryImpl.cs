@@ -33,7 +33,7 @@ namespace ApiMinisterioRecomeco.Infrastructure
 
         public async Task<Relatorio> GetByIdAsync(Int64 id)
         {
-            return await _dbContext.Relatorios.FindAsync(id);
+            return await _dbContext.Relatorios.FirstOrDefaultAsync(r => r.Id == id) ?? await Task.FromResult<Relatorio>(null);
         }
 
         public async Task UpdateAsync(Relatorio relatorio)

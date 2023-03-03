@@ -32,7 +32,7 @@ namespace ApiMinisterioRecomeco.Infrastructure
 
         public async Task<Voluntario> GetByIdAsync(Int64 id)
         {
-            return await _dbContext.Voluntarios.FindAsync(id);
+            return await _dbContext.Voluntarios.FirstOrDefaultAsync(v => v.Id == id) ?? await Task.FromResult<Voluntario>(null);
         }
 
         public async Task UpdateAsync(Voluntario voluntario)

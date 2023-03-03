@@ -71,6 +71,7 @@ namespace ApiMinisterioRecomeco.Services
             try
             {
                 voluntario.DataAlteracao = DateTime.Now;
+
                 await _voluntarioRepository.UpdateAsync(voluntario);
             }
             catch (MinisterioRecomecoException ex)
