@@ -1,11 +1,8 @@
 ﻿using ApiMinisterioRecomeco.Exception;
-using static ApiMinisterioRecomeco.Constants.Errors;
 using ApiMinisterioRecomeco.Models;
 using ApiMinisterioRecomeco.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace ApiMinisterioRecomeco.Controllers
 {

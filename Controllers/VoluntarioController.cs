@@ -1,7 +1,6 @@
 ﻿using ApiMinisterioRecomeco.Exception;
 using ApiMinisterioRecomeco.Models;
 using ApiMinisterioRecomeco.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 

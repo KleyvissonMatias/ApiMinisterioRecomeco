@@ -1,6 +1,4 @@
-﻿using ApiMinisterioRecomeco.Models;
-
-namespace ApiMinisterioRecomeco.Services
+﻿namespace ApiMinisterioRecomeco.Services
 {
     public interface IService<T>
     {

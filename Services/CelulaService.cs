@@ -1,8 +1,8 @@
 ﻿using ApiMinisterioRecomeco.Exception;
 using ApiMinisterioRecomeco.Infrastructure;
 using ApiMinisterioRecomeco.Models;
-using static ApiMinisterioRecomeco.Constants.Errors;
 using System.Net;
+using static ApiMinisterioRecomeco.Constants.Errors;
 
 namespace ApiMinisterioRecomeco.Services
 {

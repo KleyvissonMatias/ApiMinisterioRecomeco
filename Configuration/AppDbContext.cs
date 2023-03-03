@@ -1,6 +1,5 @@
 ﻿using ApiMinisterioRecomeco.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata;
 
 namespace ApiMinisterioRecomeco.Configuration
 {

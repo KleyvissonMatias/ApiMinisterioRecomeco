@@ -1,8 +1,6 @@
 ﻿using ApiMinisterioRecomeco.Configuration;
-using ApiMinisterioRecomeco.Exception;
 using ApiMinisterioRecomeco.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Net;
 
 namespace ApiMinisterioRecomeco.Infrastructure
 {
