@@ -9,14 +9,15 @@ namespace ApiMinisterioRecomeco.Models
         public Int64 Id { get; set; }
 
         [Column("nome_voluntario")]
-        public string NomeVoluntario { get; set; }
+        public string? NomeVoluntario { get; set; }
 
         [Column("nome_vida")]
-        public string NomeVida { get; set; }
+        public string? NomeVida { get; set; }
 
         [Column("retorno_contato")]
-        public string RetornoContato { get; set; }
+        public string? RetornoContato { get; set; }
 
+        [JsonIgnore]
         [Column("data_inclusao")]
         public DateTime DataInclusao { get; set; } = DateTime.Now;
 

@@ -9,19 +9,19 @@ namespace ApiMinisterioRecomeco.Models
         public Int64 Id { get; set; }
 
         [Column("nome_completo")]
-        public string NomeCompleto { get; set; }
+        public string? NomeCompleto { get; set; }
 
         [Column("data_nascimento")]
-        public string DataNascimento { get; set; }
+        public string? DataNascimento { get; set; }
 
         [Column("sexo")]
-        public string Sexo { get; set; }
+        public string? Sexo { get; set; }
 
         [Column("estado_civil")]
-        public string EstadoCivil { get; set; }
+        public string? EstadoCivil { get; set; }
 
         [Column("telefone_contato")]
-        public string Telefone { get; set; }
+        public string? Telefone { get; set; }
 
         [Column("telefone_outro_contato")]
         public string? TelefoneOutroContato { get; set; }
@@ -31,10 +31,10 @@ namespace ApiMinisterioRecomeco.Models
         [Column("id_endereco")]
         public Int64 EnderecoId { get; set; }
 
-        public Endereco Endereco { get; set; }
+        public Endereco? Endereco { get; set; }
 
         [Column("email")]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         [Column("rede_social")]
         public string? RedeSocial { get; set; }
@@ -46,23 +46,24 @@ namespace ApiMinisterioRecomeco.Models
         public string? NomeCelula { get; set; }
 
         [Column("tipo_conversao")]
-        public string TipoConversao { get; set; }
+        public string? TipoConversao { get; set; }
 
         [Column("campus")]
-        public string Campus { get; set; }
+        public string? Campus { get; set; }
 
         [Column("culto")]
-        public string Culto { get; set; }
+        public string? Culto { get; set; }
 
         [Column("horario_culto")]
-        public string HorarioCulto { get; set; }
+        public string? HorarioCulto { get; set; }
 
         [Column("nome_voluntario")]
-        public string NomeVoluntario { get; set; }
+        public string? NomeVoluntario { get; set; }
 
         [Column("observacao")]
         public string? Observacao { get; set; }
-
+        
+        [JsonIgnore]
         [Column("data_inclusao")]
         public DateTime DataInclusao { get; set; } = DateTime.Now;
 

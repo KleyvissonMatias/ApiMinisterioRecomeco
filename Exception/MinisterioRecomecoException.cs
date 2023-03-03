@@ -6,7 +6,7 @@ namespace ApiMinisterioRecomeco.Exception
     {
         public readonly HttpStatusCode? _httpStatusCode;
         public readonly string _message;
-        public readonly Object? _data = new object();
+        public readonly Object? _data = new();
 
         public MinisterioRecomecoException(HttpStatusCode? status, string message) : base(message)
         {

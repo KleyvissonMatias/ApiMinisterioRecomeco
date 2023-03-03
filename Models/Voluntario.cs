@@ -9,26 +9,27 @@ namespace ApiMinisterioRecomeco.Models
         public Int64 Id { get; set; }
 
         [Column("nome_completo")]
-        public string NomeCompleto { get; set; }
+        public string? NomeCompleto { get; set; }
 
         [Column("email")]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         [Column("nome_celula")]
-        public string NomeCelula { get; set; }
+        public string? NomeCelula { get; set; }
 
         [Column("lider_treinamento")]
-        public string LiderTreinamento { get; set; }
+        public string? LiderTreinamento { get; set; }
 
         [Column("lider_celula")]
-        public string LiderCelula { get; set; }
+        public string? LiderCelula { get; set; }
 
         [Column("nome_lider")]
-        public string NomeLider { get; set; }
+        public string? NomeLider { get; set; }
 
         [Column("telefone_contato")]
-        public string TelefoneContato { get; set; }
+        public string? TelefoneContato { get; set; }
 
+        [JsonIgnore]
         [Column("data_inclusao")]
         public DateTime DataInclusao { get; set; } = DateTime.Now;
 

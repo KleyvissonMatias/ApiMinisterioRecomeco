@@ -9,26 +9,27 @@ namespace ApiMinisterioRecomeco.Models
         public Int64 Id { get; set; }
         
         [Column("rua")]
-        public string Rua { get; set; }
+        public string? Rua { get; set; }
 
         [Column("numero")]
-        public string Numero { get; set; }
+        public string? Numero { get; set; }
 
         [Column("bairro")]
-        public string Bairro { get; set; }
+        public string? Bairro { get; set; }
 
         [Column("complemento")]
         public string? Complemento { get; set; }
 
         [Column("cidade")]
-        public string Cidade { get; set; }
+        public string? Cidade { get; set; }
 
         [Column("uf")]
-        public string Uf { get; set; }
+        public string? Uf { get; set; }
 
         [Column("cep")]
-        public string Cep { get; set; }
+        public string? Cep { get; set; }
 
+        [JsonIgnore]
         [Column("data_inclusao")]
         public DateTime DataInclusao { get; set; } = DateTime.Now;
 
