@@ -4,21 +4,17 @@
 		<TargetFramework>net7.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<ContainerImageName>ministeriorecomeco-api</ContainerImageName>
-		<ContainerImageTag>1.0.0</ContainerImageTag>
+		<PublishProfile>DefaultContainer</PublishProfile>
+		<UserSecretsId>6389d34b-27a8-4df3-9f8b-862a68cb2f63</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerfileContext>.</DockerfileContext>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.3" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.3" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.3">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
 		<PackageReference Include="Microsoft.NET.Build.Containers" Version="0.3.2" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.2" />
 		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
-		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql.Design" Version="1.1.2" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 	</ItemGroup>
 

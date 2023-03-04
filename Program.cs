@@ -58,14 +58,13 @@ builder.Services.AddScoped<IVoluntarioRepository, VoluntarioRepositoryImpl>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Ministério Recomeço v1");
-    });
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Ministério Recomeço v1");
+});
+
 
 app.UseHttpsRedirection();
 
