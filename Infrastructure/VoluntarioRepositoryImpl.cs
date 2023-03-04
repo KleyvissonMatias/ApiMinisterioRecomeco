@@ -1,5 +1,6 @@
 ﻿using ApiMinisterioRecomeco.Configuration;
 using ApiMinisterioRecomeco.Models;
+using ApiMinisterioRecomeco.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiMinisterioRecomeco.Infrastructure

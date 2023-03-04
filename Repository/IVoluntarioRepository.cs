@@ -1,11 +1,11 @@
 ﻿using ApiMinisterioRecomeco.Models;
 
-namespace ApiMinisterioRecomeco.Infrastructure
+namespace ApiMinisterioRecomeco.Repository
 {
     public interface IVoluntarioRepository
     {
         Task<List<Voluntario>> GetAllAsync();
-        Task<Voluntario> GetByIdAsync(Int64 id);
+        Task<Voluntario> GetByIdAsync(long id);
         Task CreateAsync(Voluntario voluntario);
         Task UpdateAsync(Voluntario voluntario);
         Task DeleteAsync(Voluntario voluntario);

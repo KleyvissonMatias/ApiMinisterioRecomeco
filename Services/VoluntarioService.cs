@@ -1,6 +1,6 @@
 ﻿using ApiMinisterioRecomeco.Exception;
-using ApiMinisterioRecomeco.Infrastructure;
 using ApiMinisterioRecomeco.Models;
+using ApiMinisterioRecomeco.Repository;
 using System.Net;
 using static ApiMinisterioRecomeco.Constants.Errors;
 
