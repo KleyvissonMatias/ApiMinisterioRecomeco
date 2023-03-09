@@ -10,9 +10,9 @@ namespace ApiMinisterioRecomeco.Controllers
     [ApiController]
     public class RelatorioController : ControllerBase
     {
-        private readonly IService<Relatorio> _service;
+        private readonly RelatorioService _service;
 
-        public RelatorioController(IService<Relatorio> service)
+        public RelatorioController(RelatorioService service)
         {
             _service = service;
         }

@@ -10,11 +10,14 @@ namespace ApiMinisterioRecomeco.Controllers
     [ApiController]
     public class CelulaController : ControllerBase
     {
-        private readonly IService<Celula> _service;
+        private readonly CelulaService _service;
+        private readonly ILogger<Celula> _logger;
+        private const string LOG_CONTROLLER = "CelulaController:";
 
-        public CelulaController(IService<Celula> service)
+        public CelulaController(CelulaService service, ILogger<Celula> logger)
         {
             _service = service;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -23,6 +26,7 @@ namespace ApiMinisterioRecomeco.Controllers
         {
             try
             {
+                _logger.LogInformation(LOG_CONTROLLER + " [Criando célula]");
                 var celulas = await _service.GetAllAsync();
                 return Ok(celulas);
             }
@@ -33,6 +37,7 @@ namespace ApiMinisterioRecomeco.Controllers
                     StatusCode = (HttpStatusCode)ex._httpStatusCode,
                     Message = ex._message
                 };
+
                 return BadRequest(responseError);
             }
             catch (System.Exception e)
@@ -42,6 +47,8 @@ namespace ApiMinisterioRecomeco.Controllers
                     StatusCode = HttpStatusCode.InternalServerError,
                     Message = e.Message
                 };
+
+                _logger.LogError(e, LOG_CONTROLLER + " [{}]", e.Message);
                 return StatusCode((int)HttpStatusCode.InternalServerError, responseError);
             }
         }
@@ -52,6 +59,7 @@ namespace ApiMinisterioRecomeco.Controllers
         {
             try
             {
+                _logger.LogInformation(LOG_CONTROLLER + " [Obtendo célula por ID]");
                 var celulas = await _service.GetByIdAsync(id);
                 return Ok(celulas);
             }
@@ -62,6 +70,8 @@ namespace ApiMinisterioRecomeco.Controllers
                     StatusCode = (HttpStatusCode)ex._httpStatusCode,
                     Message = ex._message
                 };
+
+                _logger.LogInformation(LOG_CONTROLLER + " [Criando célula]");
                 return BadRequest(responseError);
             }
             catch (System.Exception e)
@@ -71,6 +81,8 @@ namespace ApiMinisterioRecomeco.Controllers
                     StatusCode = HttpStatusCode.InternalServerError,
                     Message = e.Message
                 };
+
+                _logger.LogError(e, LOG_CONTROLLER + " [{}]", e.Message);
                 return StatusCode((int)HttpStatusCode.InternalServerError, responseError);
             }
         }
@@ -81,6 +93,7 @@ namespace ApiMinisterioRecomeco.Controllers
         {
             try
             {
+                _logger.LogInformation(LOG_CONTROLLER + " [Listando células]");
                 await _service.CreateAsync(celula);
                 return Created($"/listar-por-id?id={celula.Id}", celula);
             }
@@ -100,6 +113,8 @@ namespace ApiMinisterioRecomeco.Controllers
                     StatusCode = HttpStatusCode.InternalServerError,
                     Message = e.Message
                 };
+
+                _logger.LogError(e, LOG_CONTROLLER + " [{}]", e.Message);
                 return StatusCode((int)HttpStatusCode.InternalServerError, responseError);
             }
         }
@@ -110,6 +125,7 @@ namespace ApiMinisterioRecomeco.Controllers
         {
             try
             {
+                _logger.LogInformation(LOG_CONTROLLER + " [Atualizando célula]");
                 await _service.UpdateAsync(celulaAtualizado);
                 return NoContent();
             }
@@ -129,6 +145,8 @@ namespace ApiMinisterioRecomeco.Controllers
                     StatusCode = HttpStatusCode.InternalServerError,
                     Message = e.Message
                 };
+
+                _logger.LogError(e, LOG_CONTROLLER + " [{}]", e.Message);
                 return StatusCode((int)HttpStatusCode.InternalServerError, responseError);
             }
         }
@@ -140,6 +158,7 @@ namespace ApiMinisterioRecomeco.Controllers
         {
             try
             {
+                _logger.LogInformation(LOG_CONTROLLER + " [Deletando célula]");
                 await _service.DeleteAsync(id);
                 return NoContent();
             }
@@ -150,6 +169,7 @@ namespace ApiMinisterioRecomeco.Controllers
                     StatusCode = (HttpStatusCode)ex._httpStatusCode,
                     Message = ex._message
                 };
+
                 return BadRequest(responseError);
             }
             catch (System.Exception e)
@@ -159,6 +179,8 @@ namespace ApiMinisterioRecomeco.Controllers
                     StatusCode = HttpStatusCode.InternalServerError,
                     Message = e.Message
                 };
+
+                _logger.LogError(e, LOG_CONTROLLER + " [{}]", e.Message);
                 return StatusCode((int)HttpStatusCode.InternalServerError, responseError);
             }
         }

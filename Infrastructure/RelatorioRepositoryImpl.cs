@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ApiMinisterioRecomeco.Infrastructure
 {
-    public class RelatorioRepositoryImpl : IRelatorioRepository
+    public class RelatorioRepositoryImpl : RelatorioRepository
     {
         private readonly AppDbContext _dbContext;
 
@@ -14,29 +14,29 @@ namespace ApiMinisterioRecomeco.Infrastructure
             _dbContext = dbContext;
         }
 
-        public async Task CreateAsync(Relatorio relatorio)
+        public override async Task CreateAsync(Relatorio relatorio)
         {
             _dbContext.Relatorios.Add(relatorio);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(Relatorio relatorio)
+        public override async Task DeleteAsync(Relatorio relatorio)
         {
             _dbContext.Relatorios.Remove(relatorio);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<List<Relatorio>> GetAllAsync()
+        public override async Task<List<Relatorio>> GetAllAsync()
         {
             return await _dbContext.Relatorios.ToListAsync();
         }
 
-        public async Task<Relatorio> GetByIdAsync(Int64 id)
+        public override async Task<Relatorio> GetByIdAsync(Int64 id)
         {
             return await _dbContext.Relatorios.FirstOrDefaultAsync(r => r.Id == id) ?? await Task.FromResult<Relatorio>(null);
         }
 
-        public async Task UpdateAsync(Relatorio relatorio)
+        public override async Task UpdateAsync(Relatorio relatorio)
         {
             _dbContext.Relatorios.Update(relatorio);
             await _dbContext.SaveChangesAsync();

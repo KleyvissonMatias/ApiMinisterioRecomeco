@@ -1,11 +1,13 @@
 using ApiMinisterioRecomeco.Configuration;
 using ApiMinisterioRecomeco.Constants;
+using ApiMinisterioRecomeco.Controllers;
 using ApiMinisterioRecomeco.Infrastructure;
 using ApiMinisterioRecomeco.Models;
 using ApiMinisterioRecomeco.Repository;
 using ApiMinisterioRecomeco.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,37 +36,54 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     var builder = new ConfigurationBuilder()
                          .SetBasePath(Directory.GetCurrentDirectory())
-                         .AddJsonFile("appSettings.json", optional: true, reloadOnChange: true);
+                         .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
     IConfiguration _configuration = builder.Build();
 
     var serverVersion = new MySqlServerVersion(new Version(8, 0, 27));
 
     var connectionString = _configuration.GetConnectionString(Constants.CONNECTION_STRING);
-    options.UseMySql(connectionString, serverVersion);
+    options.UseMySql(connectionString, serverVersion,
+        providerOptions => providerOptions.EnableRetryOnFailure(maxRetryCount: 5,
+                    maxRetryDelay: System.TimeSpan.FromSeconds(30),
+                    errorNumbersToAdd: null));
 });
 
-builder.Services.AddScoped<IService<Celula>, CelulaService>();
-builder.Services.AddScoped<IService<Voluntario>, VoluntarioService>();
-builder.Services.AddScoped<IService<Vida>, VidaService>();
-builder.Services.AddScoped<IService<Relatorio>, RelatorioService>();
+builder.Services.AddScoped<CelulaController, CelulaController>();
+builder.Services.AddScoped<VoluntarioController, VoluntarioController>();
+builder.Services.AddScoped<VidaController, VidaController>();
+builder.Services.AddScoped<RelatorioController, RelatorioController>();
 
-builder.Services.AddScoped<ICelulaRepository, CelulaRepositoryImpl>();
-builder.Services.AddScoped<IVidaRepository, VidaRepositoryImpl>();
-builder.Services.AddScoped<IRelatorioRepository, RelatorioRepositoryImpl>();
-builder.Services.AddScoped<IVoluntarioRepository, VoluntarioRepositoryImpl>();
+
+builder.Services.AddScoped<CelulaService, CelulaService>(service => new(celulaRepository: service.GetRequiredService<CelulaRepository>(), logger: service.GetRequiredService<ILogger<Celula>>()));
+builder.Services.AddScoped<VoluntarioService, VoluntarioService>(service => new(voluntarioRepository: service.GetRequiredService<VoluntarioRepository>(), logger: service.GetRequiredService<ILogger<Voluntario>>()));
+builder.Services.AddScoped<VidaService, VidaService>(service => new(vidaRepository: service.GetRequiredService<VidaRepository>(), logger: service.GetRequiredService<ILogger<Vida>>()));
+builder.Services.AddScoped<RelatorioService, RelatorioService>(service => new(relatorioRepository: service.GetRequiredService<RelatorioRepository>(), logger: service.GetRequiredService<ILogger<Relatorio>>()));
+
+builder.Services.AddScoped<CelulaRepository, CelulaRepositoryImpl>();
+builder.Services.AddScoped<VidaRepository, VidaRepositoryImpl>();
+builder.Services.AddScoped<RelatorioRepository, RelatorioRepositoryImpl>();
+builder.Services.AddScoped<VoluntarioRepository, VoluntarioRepositoryImpl>();
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
+using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
 {
-    var services = scope.ServiceProvider;
+    var logger = serviceScope.ServiceProvider.GetRequiredService<ILogger<Program>>();
 
-    var context = services.GetRequiredService<AppDbContext>();
-    if (context.Database.GetPendingMigrations().Any())
+    try
     {
-        context.Database.Migrate();
+        logger.LogInformation("Migrando banco de dados...");
+        var db = serviceScope.ServiceProvider.GetRequiredService<AppDbContext>().Database.EnsureCreated();
+
+        //serviceScope.ServiceProvider.GetRequiredService<AppDbContext>().Database.Migrate();
+        logger.LogInformation("Banco de dados migrado com sucesso.");
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(ex, "Ocorreu um erro enquanto migrava o banco de dados.");
     }
 }
+
 
 app.UseSwagger();
 app.UseSwaggerUI(c =>

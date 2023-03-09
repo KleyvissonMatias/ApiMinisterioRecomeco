@@ -8,10 +8,10 @@ namespace ApiMinisterioRecomeco.Services
 {
     public class VidaService : IService<Vida>
     {
-        private readonly IVidaRepository _vidaRepository;
+        private readonly VidaRepository _vidaRepository;
         private readonly ILogger<Vida> _logger;
 
-        public VidaService(IVidaRepository vidaRepository, ILogger<Vida> logger)
+        public VidaService(VidaRepository vidaRepository, ILogger<Vida> logger)
         {
             _vidaRepository = vidaRepository;
             _logger = logger;

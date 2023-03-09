@@ -8,10 +8,11 @@ namespace ApiMinisterioRecomeco.Services
 {
     public class CelulaService : IService<Celula>
     {
-        private readonly ICelulaRepository _celulaRepository;
+        private readonly CelulaRepository _celulaRepository;
         private readonly ILogger<Celula> _logger;
+        private const string LOG_SERVICE = "CelulaService:";
 
-        public CelulaService(ICelulaRepository celulaRepository, ILogger<Celula> logger)
+        public CelulaService(CelulaRepository celulaRepository, ILogger<Celula> logger)
         {
             _celulaRepository = celulaRepository;
             _logger = logger;
@@ -21,10 +22,12 @@ namespace ApiMinisterioRecomeco.Services
         {
             try
             {
+                _logger.LogInformation(LOG_SERVICE + " [Criando célula]");
                 await _celulaRepository.CreateAsync(item);
             }
             catch (MinisterioRecomecoException ex)
             {
+                _logger.LogError(ex, LOG_SERVICE + " [{}]", ex._message);
                 throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }
@@ -33,11 +36,13 @@ namespace ApiMinisterioRecomeco.Services
         {
             try
             {
+                _logger.LogInformation(LOG_SERVICE + " [Deletando célula]");
                 var celula = await GetByIdAsync(id) ?? throw new MinisterioRecomecoException(HttpStatusCode.NotFound, ELEMENTO_NAO_ENCONTRADO);
                 await _celulaRepository.DeleteAsync(celula);
             }
             catch (MinisterioRecomecoException ex)
             {
+                _logger.LogError(ex, LOG_SERVICE + " [{}]", ex._message);
                 throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }
@@ -46,10 +51,12 @@ namespace ApiMinisterioRecomeco.Services
         {
             try
             {
+                _logger.LogInformation(LOG_SERVICE + " [Listando células]");
                 return await _celulaRepository.GetAllAsync();
             }
             catch (MinisterioRecomecoException ex)
             {
+                _logger.LogError(ex, LOG_SERVICE + " [{}]", ex._message);
                 throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }
@@ -58,10 +65,12 @@ namespace ApiMinisterioRecomeco.Services
         {
             try
             {
+                _logger.LogInformation(LOG_SERVICE + " [Obtendo célula por Id]");
                 return await _celulaRepository.GetByIdAsync(id) ?? throw new MinisterioRecomecoException(HttpStatusCode.NotFound, ELEMENTO_NAO_ENCONTRADO);
             }
             catch (MinisterioRecomecoException ex)
             {
+                _logger.LogError(ex, LOG_SERVICE + " [{}]", ex._message);
                 throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }
@@ -70,12 +79,14 @@ namespace ApiMinisterioRecomeco.Services
         {
             try
             {
+                _logger.LogInformation(LOG_SERVICE + " [Atualizando célula]");
                 item.DataAlteracao = DateTime.Now;
 
                 await _celulaRepository.UpdateAsync(item);
             }
             catch (MinisterioRecomecoException ex)
             {
+                _logger.LogError(ex, LOG_SERVICE + " [{}]", ex._message);
                 throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }

@@ -8,10 +8,10 @@ namespace ApiMinisterioRecomeco.Services
 {
     public class RelatorioService : IService<Relatorio>
     {
-        private readonly IRelatorioRepository _relatorioRepository;
+        private readonly RelatorioRepository _relatorioRepository;
         private readonly ILogger<Relatorio> _logger;
 
-        public RelatorioService(IRelatorioRepository relatorioRepository, ILogger<Relatorio> logger)
+        public RelatorioService(RelatorioRepository relatorioRepository, ILogger<Relatorio> logger)
         {
             _relatorioRepository = relatorioRepository;
             _logger = logger;
