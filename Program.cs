@@ -84,12 +84,15 @@ using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>(
     }
 }
 
-
-app.UseSwagger();
-app.UseSwaggerUI(c =>
+if (app.Environment.IsDevelopment())
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Ministério Recomeço v1");
-});
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Ministério Recomeço v1");
+    });
+}
+
 
 app.UseHttpsRedirection();
 

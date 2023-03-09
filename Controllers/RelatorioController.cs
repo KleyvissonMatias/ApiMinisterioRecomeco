@@ -6,7 +6,7 @@ using System.Net;
 
 namespace ApiMinisterioRecomeco.Controllers
 {
-    [Route("api/v1/[controller]/[action]")]
+    [Route("api/v1/relatorio/[action]")]
     [ApiController]
     public class RelatorioController : ControllerBase
     {
