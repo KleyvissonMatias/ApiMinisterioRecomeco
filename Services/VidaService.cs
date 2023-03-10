@@ -23,7 +23,7 @@ namespace ApiMinisterioRecomeco.Services
         {
             try
             {
-                _logger.LogInformation(LOG_SERVICE + " [Criando vida]");
+                _logger.LogInformation(LOG_SERVICE + " [Criando vida] - [{}]", item);
                 await _vidaRepository.CreateAsync(item);
             }
             catch (MinisterioRecomecoException ex)
@@ -80,7 +80,7 @@ namespace ApiMinisterioRecomeco.Services
         {
             try
             {
-                _logger.LogInformation(LOG_SERVICE + " [Atualizando vida]");
+                _logger.LogInformation(LOG_SERVICE + " [Atualizando vida] - [{}]", item);
                 item.DataAlteracao = DateTime.Now;
 
                 await _vidaRepository.UpdateAsync(item);

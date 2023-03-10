@@ -3,6 +3,7 @@ using ApiMinisterioRecomeco.Models;
 using ApiMinisterioRecomeco.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using System.Text.Json;
 
 namespace ApiMinisterioRecomeco.Controllers
 {
@@ -95,7 +96,7 @@ namespace ApiMinisterioRecomeco.Controllers
         {
             try
             {
-                _logger.LogInformation(LOG_CONTROLLER + " [Criando voluntário]");
+                _logger.LogInformation(LOG_CONTROLLER + " [Criando voluntário] - [{}]", JsonSerializer.Serialize(voluntario));
                 await _service.CreateAsync(voluntario);
                 return Created($"/listar-por-id?id={voluntario.Id}", voluntario);
             }
@@ -129,7 +130,7 @@ namespace ApiMinisterioRecomeco.Controllers
         {
             try
             {
-                _logger.LogInformation(LOG_CONTROLLER + " [Atualizando voluntário]");
+                _logger.LogInformation(LOG_CONTROLLER + " [Atualizando voluntário] - [{}]", JsonSerializer.Serialize(voluntarioAtualizado));
                 await _service.UpdateAsync(voluntarioAtualizado);
                 return NoContent(); ;
             }

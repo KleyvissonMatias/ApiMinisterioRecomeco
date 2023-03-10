@@ -23,7 +23,7 @@ namespace ApiMinisterioRecomeco.Services
         {
             try
             {
-                _logger.LogInformation(LOG_SERVICE + " [Criando célula]");
+                _logger.LogInformation(LOG_SERVICE + " [Criando célula] - [{}]", item);
                 await _celulaRepository.CreateAsync(item);
             }
             catch (MinisterioRecomecoException ex)
@@ -66,7 +66,7 @@ namespace ApiMinisterioRecomeco.Services
         {
             try
             {
-                _logger.LogInformation(LOG_SERVICE + " [Obtendo célula por Id]");
+                _logger.LogInformation(LOG_SERVICE + " [Obtendo célula por ID]");
                 return await _celulaRepository.GetByIdAsync(id) ?? throw new MinisterioRecomecoException(HttpStatusCode.NotFound, ELEMENTO_NAO_ENCONTRADO);
             }
             catch (MinisterioRecomecoException ex)
@@ -80,7 +80,7 @@ namespace ApiMinisterioRecomeco.Services
         {
             try
             {
-                _logger.LogInformation(LOG_SERVICE + " [Atualizando célula]");
+                _logger.LogInformation(LOG_SERVICE + " [Atualizando célula] - [{}]", item);
 
                 item.DataAlteracao = DateTime.Now;
 

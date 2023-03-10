@@ -3,6 +3,8 @@ using ApiMinisterioRecomeco.Models;
 using ApiMinisterioRecomeco.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace ApiMinisterioRecomeco.Controllers
 {
@@ -94,7 +96,7 @@ namespace ApiMinisterioRecomeco.Controllers
         {
             try
             {
-                _logger.LogInformation(LOG_CONTROLLER + " [Listando células]");
+                _logger.LogInformation(LOG_CONTROLLER + " [Criando célula] - [{}]", JsonSerializer.Serialize(celula));
                 await _service.CreateAsync(celula);
                 return Created($"/listar-por-id?id={celula.Id}", celula);
             }
@@ -128,7 +130,7 @@ namespace ApiMinisterioRecomeco.Controllers
         {
             try
             {
-                _logger.LogInformation(LOG_CONTROLLER + " [Atualizando célula]");
+                _logger.LogInformation(LOG_CONTROLLER + " [Atualizando célula] - [{}]", JsonSerializer.Serialize(celulaAtualizado));
                 await _service.UpdateAsync(celulaAtualizado);
                 return NoContent();
             }

@@ -23,7 +23,7 @@ namespace ApiMinisterioRecomeco.Services
         {
             try
             {
-                _logger.LogInformation(LOG_SERVICE + " [Criando relatório]");
+                _logger.LogInformation(LOG_SERVICE + " [Criando relatório] - [{}]", item);
                 await _relatorioRepository.CreateAsync(item);
             }
             catch (MinisterioRecomecoException ex)
@@ -79,7 +79,7 @@ namespace ApiMinisterioRecomeco.Services
         {
             try
             {
-                _logger.LogInformation(LOG_SERVICE + " [Atualizando relatório]");
+                _logger.LogInformation(LOG_SERVICE + " [Atualizando relatório] - [{}]", item);
 
                 item.DataAlteracao = DateTime.Now;
 
