@@ -11,6 +11,8 @@ namespace ApiMinisterioRecomeco.Services
         private readonly RelatorioRepository _relatorioRepository;
         private readonly ILogger<Relatorio> _logger;
 
+        private const string LOG_SERVICE = "RelatorioService:";
+
         public RelatorioService(RelatorioRepository relatorioRepository, ILogger<Relatorio> logger)
         {
             _relatorioRepository = relatorioRepository;
@@ -21,10 +23,12 @@ namespace ApiMinisterioRecomeco.Services
         {
             try
             {
+                _logger.LogInformation(LOG_SERVICE + " [Criando relatório]");
                 await _relatorioRepository.CreateAsync(item);
             }
             catch (MinisterioRecomecoException ex)
             {
+                _logger.LogError(ex, LOG_SERVICE + " [{}]", ex._message);
                 throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }
@@ -33,11 +37,13 @@ namespace ApiMinisterioRecomeco.Services
         {
             try
             {
+                _logger.LogInformation(LOG_SERVICE + " [Deletando relatório]");
                 var relatorio = await GetByIdAsync(id) ?? throw new MinisterioRecomecoException(HttpStatusCode.NotFound, ELEMENTO_NAO_ENCONTRADO);
                 await _relatorioRepository.DeleteAsync(relatorio);
             }
             catch (MinisterioRecomecoException ex)
             {
+                _logger.LogError(ex, LOG_SERVICE + " [{}]", ex._message);
                 throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }
@@ -46,6 +52,7 @@ namespace ApiMinisterioRecomeco.Services
         {
             try
             {
+                _logger.LogInformation(LOG_SERVICE + " [Listando relatórios]");
                 return await _relatorioRepository.GetAllAsync();
             }
             catch (MinisterioRecomecoException ex)
@@ -58,10 +65,12 @@ namespace ApiMinisterioRecomeco.Services
         {
             try
             {
+                _logger.LogInformation(LOG_SERVICE + " [Obtendo relatório por ID]");
                 return await _relatorioRepository.GetByIdAsync(id) ?? throw new MinisterioRecomecoException(HttpStatusCode.NotFound, ELEMENTO_NAO_ENCONTRADO);
             }
             catch (MinisterioRecomecoException ex)
             {
+                _logger.LogError(ex, LOG_SERVICE + " [{}]", ex._message);
                 throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }
@@ -70,12 +79,15 @@ namespace ApiMinisterioRecomeco.Services
         {
             try
             {
+                _logger.LogInformation(LOG_SERVICE + " [Atualizando relatório]");
+
                 item.DataAlteracao = DateTime.Now;
 
                 await _relatorioRepository.UpdateAsync(item);
             }
             catch (MinisterioRecomecoException ex)
             {
+                _logger.LogError(ex, LOG_SERVICE + " [{}]", ex._message);
                 throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }

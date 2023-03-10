@@ -12,6 +12,7 @@ namespace ApiMinisterioRecomeco.Controllers
     {
         private readonly CelulaService _service;
         private readonly ILogger<Celula> _logger;
+
         private const string LOG_CONTROLLER = "CelulaController:";
 
         public CelulaController(CelulaService service, ILogger<Celula> logger)
@@ -26,7 +27,7 @@ namespace ApiMinisterioRecomeco.Controllers
         {
             try
             {
-                _logger.LogInformation(LOG_CONTROLLER + " [Criando célula]");
+                _logger.LogInformation(LOG_CONTROLLER + " [Listando células]");
                 var celulas = await _service.GetAllAsync();
                 return Ok(celulas);
             }
@@ -37,7 +38,7 @@ namespace ApiMinisterioRecomeco.Controllers
                     StatusCode = (HttpStatusCode)ex._httpStatusCode,
                     Message = ex._message
                 };
-
+                _logger.LogError(ex, LOG_CONTROLLER + " [{}]", ex._message);
                 return BadRequest(responseError);
             }
             catch (System.Exception e)
@@ -71,7 +72,7 @@ namespace ApiMinisterioRecomeco.Controllers
                     Message = ex._message
                 };
 
-                _logger.LogInformation(LOG_CONTROLLER + " [Criando célula]");
+                _logger.LogError(ex, LOG_CONTROLLER + " [{}]", ex._message);
                 return BadRequest(responseError);
             }
             catch (System.Exception e)
@@ -104,6 +105,8 @@ namespace ApiMinisterioRecomeco.Controllers
                     StatusCode = (HttpStatusCode)ex._httpStatusCode,
                     Message = ex._message
                 };
+
+                _logger.LogError(ex, LOG_CONTROLLER + " [{}]", ex._message);
                 return BadRequest(responseError);
             }
             catch (System.Exception e)
@@ -136,6 +139,8 @@ namespace ApiMinisterioRecomeco.Controllers
                     StatusCode = (HttpStatusCode)ex._httpStatusCode,
                     Message = ex._message
                 };
+
+                _logger.LogError(ex, LOG_CONTROLLER + " [{}]", ex._message);
                 return BadRequest(responseError);
             }
             catch (System.Exception e)
@@ -170,6 +175,7 @@ namespace ApiMinisterioRecomeco.Controllers
                     Message = ex._message
                 };
 
+                _logger.LogError(ex, LOG_CONTROLLER + " [{}]", ex._message);
                 return BadRequest(responseError);
             }
             catch (System.Exception e)

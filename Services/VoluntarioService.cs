@@ -11,6 +11,8 @@ namespace ApiMinisterioRecomeco.Services
         private readonly VoluntarioRepository _voluntarioRepository;
         private readonly ILogger<Voluntario> _logger;
 
+        private const string LOG_SERVICE = "VoluntarioService:";
+
         public VoluntarioService(VoluntarioRepository voluntarioRepository, ILogger<Voluntario> logger)
         {
             _voluntarioRepository = voluntarioRepository;
@@ -21,10 +23,12 @@ namespace ApiMinisterioRecomeco.Services
         {
             try
             {
+                _logger.LogInformation(LOG_SERVICE + " [Criando voluntário]");
                 await _voluntarioRepository.CreateAsync(voluntario);
             }
             catch (MinisterioRecomecoException ex)
             {
+                _logger.LogError(ex, LOG_SERVICE + " [{}]", ex._message);
                 throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }
@@ -33,11 +37,13 @@ namespace ApiMinisterioRecomeco.Services
         {
             try
             {
+                _logger.LogInformation(LOG_SERVICE + " [Deletando voluntário]");
                 var voluntario = await GetByIdAsync(id) ?? throw new MinisterioRecomecoException(HttpStatusCode.NotFound, ELEMENTO_NAO_ENCONTRADO);
                 await _voluntarioRepository.DeleteAsync(voluntario);
             }
             catch (MinisterioRecomecoException ex)
             {
+                _logger.LogError(ex, LOG_SERVICE + " [{}]", ex._message);
                 throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }
@@ -46,10 +52,12 @@ namespace ApiMinisterioRecomeco.Services
         {
             try
             {
+                _logger.LogInformation(LOG_SERVICE + " [Listando voluntários]");
                 return await _voluntarioRepository.GetAllAsync();
             }
             catch (MinisterioRecomecoException ex)
             {
+                _logger.LogError(ex, LOG_SERVICE + " [{}]", ex._message);
                 throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }
@@ -58,10 +66,12 @@ namespace ApiMinisterioRecomeco.Services
         {
             try
             {
+                _logger.LogInformation(LOG_SERVICE + " [Obtendo voluntário por ID]");
                 return await _voluntarioRepository.GetByIdAsync(id) ?? throw new MinisterioRecomecoException(HttpStatusCode.NotFound, ELEMENTO_NAO_ENCONTRADO);
             }
             catch (MinisterioRecomecoException ex)
             {
+                _logger.LogError(ex, LOG_SERVICE + " [{}]", ex._message);
                 throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }
@@ -70,12 +80,15 @@ namespace ApiMinisterioRecomeco.Services
         {
             try
             {
+                _logger.LogInformation(LOG_SERVICE + " [Atualizando voluntário]");
+
                 voluntario.DataAlteracao = DateTime.Now;
 
                 await _voluntarioRepository.UpdateAsync(voluntario);
             }
             catch (MinisterioRecomecoException ex)
             {
+                _logger.LogError(ex, LOG_SERVICE + " [{}]", ex._message);
                 throw new MinisterioRecomecoException(ex._httpStatusCode, ex._message, ex);
             }
         }

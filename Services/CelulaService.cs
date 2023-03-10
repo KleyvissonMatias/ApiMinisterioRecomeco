@@ -10,6 +10,7 @@ namespace ApiMinisterioRecomeco.Services
     {
         private readonly CelulaRepository _celulaRepository;
         private readonly ILogger<Celula> _logger;
+
         private const string LOG_SERVICE = "CelulaService:";
 
         public CelulaService(CelulaRepository celulaRepository, ILogger<Celula> logger)
@@ -80,6 +81,7 @@ namespace ApiMinisterioRecomeco.Services
             try
             {
                 _logger.LogInformation(LOG_SERVICE + " [Atualizando célula]");
+
                 item.DataAlteracao = DateTime.Now;
 
                 await _celulaRepository.UpdateAsync(item);

@@ -11,10 +11,14 @@ namespace ApiMinisterioRecomeco.Controllers
     public class VoluntarioController : ControllerBase
     {
         private readonly VoluntarioService _service;
+        private readonly ILogger<Voluntario> _logger;
 
-        public VoluntarioController(VoluntarioService service)
+        private const string LOG_CONTROLLER = "VoluntarioController:";
+
+        public VoluntarioController(VoluntarioService service, ILogger<Voluntario> logger)
         {
             _service = service;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -23,6 +27,7 @@ namespace ApiMinisterioRecomeco.Controllers
         {
             try
             {
+                _logger.LogInformation(LOG_CONTROLLER + " [Listando voluntários]");
                 var voluntarios = await _service.GetAllAsync();
                 return Ok(voluntarios);
             }
@@ -33,6 +38,8 @@ namespace ApiMinisterioRecomeco.Controllers
                     StatusCode = (HttpStatusCode)ex._httpStatusCode,
                     Message = ex._message
                 };
+
+                _logger.LogError(ex, LOG_CONTROLLER + " [{}]", ex._message);
                 return BadRequest(responseError);
             }
             catch (System.Exception e)
@@ -42,6 +49,8 @@ namespace ApiMinisterioRecomeco.Controllers
                     StatusCode = HttpStatusCode.InternalServerError,
                     Message = e.Message
                 };
+
+                _logger.LogError(e, LOG_CONTROLLER + " [{}]", e.Message);
                 return StatusCode((int)HttpStatusCode.InternalServerError, responseError);
             }
         }
@@ -52,6 +61,7 @@ namespace ApiMinisterioRecomeco.Controllers
         {
             try
             {
+                _logger.LogInformation(LOG_CONTROLLER + " [Listando voluntário por ID]");
                 var voluntario = await _service.GetByIdAsync(id);
                 return Ok(voluntario);
             }
@@ -62,6 +72,8 @@ namespace ApiMinisterioRecomeco.Controllers
                     StatusCode = (HttpStatusCode)ex._httpStatusCode,
                     Message = ex._message
                 };
+
+                _logger.LogError(ex, LOG_CONTROLLER + " [{}]", ex._message);
                 return BadRequest(responseError);
             }
             catch (System.Exception e)
@@ -71,6 +83,8 @@ namespace ApiMinisterioRecomeco.Controllers
                     StatusCode = HttpStatusCode.InternalServerError,
                     Message = e.Message
                 };
+
+                _logger.LogError(e, LOG_CONTROLLER + " [{}]", e.Message);
                 return StatusCode((int)HttpStatusCode.InternalServerError, responseError);
             }
         }
@@ -81,6 +95,7 @@ namespace ApiMinisterioRecomeco.Controllers
         {
             try
             {
+                _logger.LogInformation(LOG_CONTROLLER + " [Criando voluntário]");
                 await _service.CreateAsync(voluntario);
                 return Created($"/listar-por-id?id={voluntario.Id}", voluntario);
             }
@@ -91,6 +106,8 @@ namespace ApiMinisterioRecomeco.Controllers
                     StatusCode = (HttpStatusCode)ex._httpStatusCode,
                     Message = ex._message
                 };
+
+                _logger.LogError(ex, LOG_CONTROLLER + " [{}]", ex._message);
                 return BadRequest(responseError);
             }
             catch (System.Exception e)
@@ -100,6 +117,8 @@ namespace ApiMinisterioRecomeco.Controllers
                     StatusCode = HttpStatusCode.InternalServerError,
                     Message = e.Message
                 };
+
+                _logger.LogError(e, LOG_CONTROLLER + " [{}]", e.Message);
                 return StatusCode((int)HttpStatusCode.InternalServerError, responseError);
             }
         }
@@ -110,6 +129,7 @@ namespace ApiMinisterioRecomeco.Controllers
         {
             try
             {
+                _logger.LogInformation(LOG_CONTROLLER + " [Atualizando voluntário]");
                 await _service.UpdateAsync(voluntarioAtualizado);
                 return NoContent(); ;
             }
@@ -120,6 +140,8 @@ namespace ApiMinisterioRecomeco.Controllers
                     StatusCode = (HttpStatusCode)ex._httpStatusCode,
                     Message = ex._message
                 };
+
+                _logger.LogError(ex, LOG_CONTROLLER + " [{}]", ex._message);
                 return BadRequest(responseError);
             }
             catch (System.Exception e)
@@ -129,6 +151,8 @@ namespace ApiMinisterioRecomeco.Controllers
                     StatusCode = HttpStatusCode.InternalServerError,
                     Message = e.Message
                 };
+
+                _logger.LogError(e, LOG_CONTROLLER + " [{}]", e.Message);
                 return StatusCode((int)HttpStatusCode.InternalServerError, responseError);
             }
         }
@@ -140,6 +164,7 @@ namespace ApiMinisterioRecomeco.Controllers
         {
             try
             {
+                _logger.LogInformation(LOG_CONTROLLER + " [Deletando voluntário]");
                 await _service.DeleteAsync(id);
                 return NoContent();
             }
@@ -150,6 +175,8 @@ namespace ApiMinisterioRecomeco.Controllers
                     StatusCode = (HttpStatusCode)ex._httpStatusCode,
                     Message = ex._message
                 };
+
+                _logger.LogError(ex, LOG_CONTROLLER + " [{}]", ex._message);
                 return BadRequest(responseError);
             }
             catch (System.Exception e)
@@ -159,6 +186,8 @@ namespace ApiMinisterioRecomeco.Controllers
                     StatusCode = HttpStatusCode.InternalServerError,
                     Message = e.Message
                 };
+
+                _logger.LogError(e, LOG_CONTROLLER + " [{}]", e.Message);
                 return StatusCode((int)HttpStatusCode.InternalServerError, responseError);
             }
         }
