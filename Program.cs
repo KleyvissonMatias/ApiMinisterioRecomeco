@@ -21,7 +21,7 @@ builder.Services.AddSwaggerGen(c =>
         new OpenApiInfo
         {
             Title = "API Ministério Recomeço",
-            Description = "API de cadastro de novos membros voluntários do ministério recomeço da igreja do amor.",
+            Description = "API de cadastro de novos membros e voluntários do ministério recomeço da igreja do amor.",
             Version = "v1",
             Contact = new OpenApiContact()
             {
