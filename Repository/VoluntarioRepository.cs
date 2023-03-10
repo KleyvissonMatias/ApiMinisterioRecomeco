@@ -2,7 +2,7 @@
 
 namespace ApiMinisterioRecomeco.Repository
 {
-    public abstract class VoluntarioRepository
+    public abstract class VoluntarioRepository : IRepository<Voluntario>
     {
         public abstract Task<List<Voluntario>> GetAllAsync();
         public abstract Task<Voluntario> GetByIdAsync(long id);

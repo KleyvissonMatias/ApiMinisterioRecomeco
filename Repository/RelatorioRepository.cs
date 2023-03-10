@@ -2,7 +2,7 @@
 
 namespace ApiMinisterioRecomeco.Repository
 {
-    public abstract class RelatorioRepository
+    public abstract class RelatorioRepository : IRepository<Relatorio>
     {
         public abstract Task<List<Relatorio>> GetAllAsync();
         public abstract Task<Relatorio> GetByIdAsync(Int64 id);

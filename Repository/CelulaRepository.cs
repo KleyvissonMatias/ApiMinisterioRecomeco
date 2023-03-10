@@ -2,12 +2,12 @@
 
 namespace ApiMinisterioRecomeco.Repository
 {
-    public abstract class CelulaRepository
+    public abstract class CelulaRepository : IRepository<Celula>
     {
+        public abstract Task CreateAsync(Celula t);
+        public abstract Task DeleteAsync(Celula t);
         public abstract Task<List<Celula>> GetAllAsync();
         public abstract Task<Celula> GetByIdAsync(long id);
-        public abstract Task CreateAsync(Celula celula);
-        public abstract Task UpdateAsync(Celula celula);
-        public abstract Task DeleteAsync(Celula celula);
+        public abstract Task UpdateAsync(Celula t);
     }
 }
