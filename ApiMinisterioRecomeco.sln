@@ -5,8 +5,6 @@ VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiMinisterioRecomeco", "ApiMinisterioRecomeco.csproj", "{1FAF7662-1AB7-4A21-A1BF-E03572B17AF1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiMinisterioRecomecoTeste", "..\ApiMinisterioRecomecoTeste\ApiMinisterioRecomecoTeste.csproj", "{AC847B15-45C9-4F62-9BAB-2AB8A43FB012}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{1FAF7662-1AB7-4A21-A1BF-E03572B17AF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FAF7662-1AB7-4A21-A1BF-E03572B17AF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FAF7662-1AB7-4A21-A1BF-E03572B17AF1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AC847B15-45C9-4F62-9BAB-2AB8A43FB012}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC847B15-45C9-4F62-9BAB-2AB8A43FB012}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AC847B15-45C9-4F62-9BAB-2AB8A43FB012}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AC847B15-45C9-4F62-9BAB-2AB8A43FB012}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

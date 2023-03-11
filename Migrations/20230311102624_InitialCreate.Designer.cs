@@ -3,6 +3,7 @@ using System;
 using ApiMinisterioRecomeco.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -11,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiMinisterioRecomeco.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230301032850_InitialCreate")]
+    [Migration("20230311102624_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -20,7 +21,9 @@ namespace ApiMinisterioRecomeco.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.3")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("ApiMinisterioRecomeco.Models.Celula", b =>
                 {
@@ -29,60 +32,55 @@ namespace ApiMinisterioRecomeco.Migrations
                         .HasColumnType("bigint")
                         .HasColumnName("id");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
                     b.Property<DateTime?>("DataAlteracao")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("data_alteracao");
 
                     b.Property<DateTime>("DataInclusao")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("data_inclusao");
 
                     b.Property<string>("EmailLider")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("email_lider");
 
+                    b.Property<long>("EnderecoId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("id_endereco");
+
                     b.Property<string>("Horario")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("horario");
 
                     b.Property<string>("NomeCelula")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("nome_celula");
 
                     b.Property<string>("NomeCoordenadores")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("nome_coordenadores");
 
                     b.Property<string>("NomeLider")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("nome_lider");
 
                     b.Property<string>("Rede")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("rede");
 
                     b.Property<string>("Reuniao")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("reuniao");
 
                     b.Property<string>("TelefoneContato")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("telefone_contato");
-
-                    b.Property<long>("id_endereco")
-                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("id_endereco")
+                    b.HasIndex("EnderecoId")
                         .IsUnique();
 
                     b.ToTable("Celulas");
@@ -95,46 +93,42 @@ namespace ApiMinisterioRecomeco.Migrations
                         .HasColumnType("bigint")
                         .HasColumnName("id");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
                     b.Property<string>("Bairro")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("bairro");
 
                     b.Property<string>("Cep")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("cep");
 
                     b.Property<string>("Cidade")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("cidade");
 
                     b.Property<string>("Complemento")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("complemento");
 
                     b.Property<DateTime?>("DataAlteracao")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("data_alteracao");
 
                     b.Property<DateTime>("DataInclusao")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("data_inclusao");
 
                     b.Property<string>("Numero")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("numero");
 
                     b.Property<string>("Rua")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("rua");
 
                     b.Property<string>("Uf")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("uf");
 
                     b.HasKey("Id");
@@ -149,27 +143,26 @@ namespace ApiMinisterioRecomeco.Migrations
                         .HasColumnType("bigint")
                         .HasColumnName("id");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
                     b.Property<DateTime?>("DataAlteracao")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("data_alteracao");
 
                     b.Property<DateTime>("DataInclusao")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("data_inclusao");
 
                     b.Property<string>("NomeVida")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("nome_vida");
 
                     b.Property<string>("NomeVoluntario")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("nome_voluntario");
 
                     b.Property<string>("RetornoContato")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("retorno_contato");
 
                     b.HasKey("Id");
@@ -184,96 +177,88 @@ namespace ApiMinisterioRecomeco.Migrations
                         .HasColumnType("bigint")
                         .HasColumnName("id");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
                     b.Property<string>("Campus")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("campus");
 
                     b.Property<string>("Culto")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("culto");
 
                     b.Property<DateTime?>("DataAlteracao")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("data_alteracao");
 
                     b.Property<DateTime>("DataInclusao")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("data_inclusao");
 
                     b.Property<string>("DataNascimento")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("data_nascimento");
 
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("email");
 
+                    b.Property<long>("EnderecoId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("id_endereco");
+
                     b.Property<string>("EstadoCivil")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("estado_civil");
 
                     b.Property<string>("HorarioCulto")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("horario_culto");
 
                     b.Property<string>("NomeCelula")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("nome_celula");
 
                     b.Property<string>("NomeCompleto")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("nome_completo");
 
                     b.Property<string>("NomeVoluntario")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("nome_voluntario");
 
                     b.Property<string>("Observacao")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("observacao");
 
                     b.Property<string>("PossuiCelula")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("possui_celula");
 
                     b.Property<string>("RedeSocial")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("rede_social");
 
                     b.Property<string>("Sexo")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("sexo");
 
                     b.Property<string>("Telefone")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("telefone_contato");
 
                     b.Property<string>("TelefoneOutroContato")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("telefone_outro_contato");
 
                     b.Property<string>("TipoConversao")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("tipo_conversao");
-
-                    b.Property<long>("id_endereco")
-                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("id_endereco")
+                    b.HasIndex("EnderecoId")
                         .IsUnique();
 
                     b.ToTable("Vidas");
@@ -286,47 +271,42 @@ namespace ApiMinisterioRecomeco.Migrations
                         .HasColumnType("bigint")
                         .HasColumnName("id");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
                     b.Property<DateTime?>("DataAlteracao")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("data_alteracao");
 
                     b.Property<DateTime>("DataInclusao")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("data_inclusao");
 
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("email");
 
                     b.Property<string>("LiderCelula")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("lider_celula");
 
                     b.Property<string>("LiderTreinamento")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("lider_treinamento");
 
                     b.Property<string>("NomeCelula")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("nome_celula");
 
                     b.Property<string>("NomeCompleto")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("nome_completo");
 
                     b.Property<string>("NomeLider")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("nome_lider");
 
                     b.Property<string>("TelefoneContato")
-                        .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("telefone_contato");
 
                     b.HasKey("Id");
@@ -338,7 +318,7 @@ namespace ApiMinisterioRecomeco.Migrations
                 {
                     b.HasOne("ApiMinisterioRecomeco.Models.Endereco", "Endereco")
                         .WithOne()
-                        .HasForeignKey("ApiMinisterioRecomeco.Models.Celula", "id_endereco")
+                        .HasForeignKey("ApiMinisterioRecomeco.Models.Celula", "EnderecoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -349,7 +329,7 @@ namespace ApiMinisterioRecomeco.Migrations
                 {
                     b.HasOne("ApiMinisterioRecomeco.Models.Endereco", "Endereco")
                         .WithOne()
-                        .HasForeignKey("ApiMinisterioRecomeco.Models.Vida", "id_endereco")
+                        .HasForeignKey("ApiMinisterioRecomeco.Models.Vida", "EnderecoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
