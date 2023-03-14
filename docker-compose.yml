@@ -1,22 +1,21 @@
 version: '3.4'
 services:
-  apiministeriorecomeco:
-    image: ${DOCKER_REGISTRY-}apiministeriorecomeco
-    container_name: apiministeriorecomecoapp
+  ApiMinisterioRecomeco:
+    image: ${DOCKER_REGISTRY-}ministeriorecomecoapi
     build:
       context: .
       dockerfile: /Dockerfile
     depends_on:
-      - sqldata
-    ports: 
-      - "5000:80"
-      - "5001:443" 
+      - sqlserver
  
-  sqldata:
+  sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: apiministeriorecomecodb
+    hostname: 'sqlserver'
     environment:
       - "ACCEPT_EULA=Y"
-      - "MSSQL_SA_PASSWORD=R00TR00T"
+      - "MSSQL_SA_PASSWORD=Filmes@#$2020"
+      - "MSSQL_PID=Express"
+    volumes:
+      - c:\dados\volumes\sqlserver:/var/opt/mssql/data
     ports:
-      - 1450:1433  
+      - '1450:1433' 
