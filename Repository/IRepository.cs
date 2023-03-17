@@ -2,7 +2,7 @@
 
 namespace ApiMinisterioRecomeco.Repository
 {
-    public interface IRepository<T>
+    public interface IRepository<T> where T : class
     {
         Task<List<T>> GetAllAsync();
         Task<T> GetByIdAsync(Int64 id);

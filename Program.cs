@@ -20,6 +20,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
          options => options.EnableRetryOnFailure());
 });
 
+builder.Services.AddCors();
+
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -65,7 +67,7 @@ using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>(
     try
     {
         logger.LogInformation("Migrando banco de dados...");
-        var db = serviceScope.ServiceProvider.GetRequiredService<AppDbContext>().Database.EnsureCreated;
+        var db = serviceScope.ServiceProvider.GetRequiredService<AppDbContext>().Database.Migrate;
         logger.LogInformation("Banco de dados migrado com sucesso.");
     }
     catch (Exception ex)
