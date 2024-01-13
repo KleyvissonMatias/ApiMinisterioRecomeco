@@ -13,7 +13,7 @@ services:
     hostname: 'sqlserver'
     environment:
       - "ACCEPT_EULA=Y"
-      - "MSSQL_SA_PASSWORD=Filmes@#$2020"
+      - "MSSQL_SA_PASSWORD=Teste"
       - "MSSQL_PID=Express"
     volumes:
       - c:\dados\volumes\sqlserver:/var/opt/mssql/data
