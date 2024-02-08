@@ -1,6 +1,6 @@
-# API Ministerio Recomeço versão escrita em C# (Versão 7.0) com .NET Core, Entity Framework, SQL Server e Migrations
+# API Ministerio Recomeço V2
 
-Esta é uma API escrita em C# utilizando .NET Core 7.0, Entity Framework e SQL Server para fornecer endpoints CRUD para quatro entidades principais: Celula, Relatorio, Vida e Voluntario. Este README fornece instruções sobre como configurar o ambiente, migrar o banco de dados e utilizar os endpoints disponíveis.
+Esta é uma API escrita em C# utilizando .NET Core 7.0, Entity Framework, migrations e SQL Server para fornecer endpoints CRUD para quatro entidades principais: Celula, Relatorio, Vida e Voluntario. Este README fornece instruções sobre como configurar o ambiente, migrar o banco de dados e utilizar os endpoints disponíveis.
 
 ## Pré-requisitos
 
